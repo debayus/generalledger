@@ -1,0 +1,43 @@
+name: generalledger
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.18.0-44.1.beta <3.0.0'
+
+dependencies: 
+  crypto: ^3.0.1
+  cupertino_icons: ^1.0.2
+  get: 4.6.5
+  flutter: 
+    sdk: flutter
+  dio: ^4.0.6
+  file_picker: ^4.5.1
+  flutter_easyloading: ^3.0.3
+  package_info_plus: ^1.4.0
+  get_storage: ^2.0.3
+  google_fonts: ^2.3.1
+  intl: ^0.17.0
+  modal_bottom_sheet: ^2.0.1
+  http: ^0.13.4
+  shared_preferences: ^2.0.13
+  shimmer: ^2.0.0
+  url_launcher: ^6.0.20
+  url_strategy: ^0.2.0
+
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  lints: 2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
+  assets:
+    - assets/images/logo.png
+
+  fonts:
+    - family: FontAwesome5
+      fonts:
+        - asset: assets/fonts/FontAwesome5.ttf
