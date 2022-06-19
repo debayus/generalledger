@@ -17,15 +17,8 @@ class HttpApi {
   }
 
   static ApiResultModel getResult(http.Response r) {
-    if (r.statusCode != 200) {
-      if (r.statusCode != 500 && r.statusCode != 404) {
-        return ApiResultModel(false, body: r.body);
-      } else {
-        return ApiResultModel(false, body: r.statusCode);
-      }
-    } else {
-      return ApiResultModel(true, body: r.body);
-    }
+    return ApiResultModel(r.statusCode == 200,
+        body: r.body, statusCode: r.statusCode);
   }
 
   static Future<ApiResultModel> apiGet(String url) async {
@@ -58,7 +51,7 @@ class HttpApi {
       );
       return getResult(r);
     } catch (ex) {
-      return ApiResultModel(false, body: "$ex");
+      return ApiResultModel(false, message: "$ex");
     }
   }
 
@@ -76,7 +69,7 @@ class HttpApi {
       );
       return getResult(r);
     } catch (ex) {
-      return ApiResultModel(false, body: "$ex");
+      return ApiResultModel(false, message: "$ex");
     }
   }
 
@@ -92,7 +85,7 @@ class HttpApi {
       );
       return getResult(r);
     } catch (ex) {
-      return ApiResultModel(false, body: "$ex");
+      return ApiResultModel(false, message: "$ex");
     }
   }
 }

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/akun/bindings/akun_binding.dart';
 import '../modules/akun/views/akun_view.dart';
+import '../modules/akun_setup/bindings/akun_setup_binding.dart';
+import '../modules/akun_setup/views/akun_setup_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/laporan/bindings/laporan_binding.dart';
@@ -178,6 +180,11 @@ class AppPages {
       name: _Paths.SETTINGS_MASTER_DATA_KONSEP_AKUN_SETUP,
       page: () => SettingsMasterDataKonsepAkunSetupView(),
       binding: SettingsMasterDataKonsepAkunSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.AKUN_SETUP,
+      page: () => AkunSetupView(),
+      binding: AkunSetupBinding(),
     ),
   ];
 }

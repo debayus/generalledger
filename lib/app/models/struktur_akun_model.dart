@@ -32,6 +32,7 @@ class StrukturAkunModel {
 class StrukturAkunDetailModel {
   bool? isNew;
   int? id;
+  int? idStrukturAkun;
   String? nama;
   bool? cash;
   bool? bank;
@@ -52,6 +53,7 @@ class StrukturAkunDetailModel {
   static fromDynamic(dynamic dynamicData) {
     final model = StrukturAkunDetailModel();
     model.id = dynamicData['id'];
+    model.idStrukturAkun = dynamicData['id_struktur_akun'];
     model.nama = dynamicData['nama'];
     model.cash = dynamicData['cash'] == 1;
     model.bank = dynamicData['bank'] == 1;

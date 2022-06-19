@@ -35,6 +35,7 @@ abstract class Routes {
       _Paths.SETTINGS_MASTER_DATA_STRUKTUR_AKUN_SETUP;
   static const SETTINGS_MASTER_DATA_KONSEP_AKUN_SETUP =
       _Paths.SETTINGS_MASTER_DATA_KONSEP_AKUN_SETUP;
+  static const AKUN_SETUP = _Paths.AKUN_SETUP;
 }
 
 abstract class _Paths {
@@ -69,4 +70,5 @@ abstract class _Paths {
       '/settings-master-data-struktur-akun-setup';
   static const SETTINGS_MASTER_DATA_KONSEP_AKUN_SETUP =
       '/settings-master-data-konsep-akun-setup';
+  static const AKUN_SETUP = '/akun-setup';
 }

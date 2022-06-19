@@ -65,7 +65,7 @@ class Helper {
     );
   }
 
-  static Future dialogWarning(String message) async {
+  static Future dialogWarning(String? message) async {
     await Get.dialog(
       AlertDialog(
         content: Column(
@@ -78,7 +78,7 @@ class Helper {
             ),
             Padding(padding: EdgeInsets.all(7)),
             TextComponent(
-              message,
+              message ?? "-",
               color: MyConfig.primaryColor.shade900,
             ),
           ],
