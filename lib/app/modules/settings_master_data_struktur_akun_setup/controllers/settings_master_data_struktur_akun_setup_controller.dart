@@ -21,7 +21,7 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
   final jenisCon = InputDropdownController<String>(
     items: [
       "Neraca",
-      "Laba Rugi",
+      "Laba - Rugi",
     ],
   );
   final keteranganCon = InputTextController();

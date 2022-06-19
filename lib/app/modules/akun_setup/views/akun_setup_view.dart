@@ -32,7 +32,6 @@ class AkunSetupView extends GetView<AkunSetupController> {
             label: 'Sub Group',
             controller: controller.subGroupCon,
             itemLabel: (e) => e?.nama ?? "",
-            required: true,
             editable: controller.formCon.editable,
           ),
           InputDropdownComponent<String>(

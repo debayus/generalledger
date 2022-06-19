@@ -78,9 +78,9 @@ class ListPageController<T> {
     }
     try {
       if (filterController.con.text.isNotEmpty) {}
-      final pageIndexX = nextPage ? pageIndex + 1 : pageIndex;
+      var pageIndexX = nextPage ? pageIndex + 1 : pageIndex;
       final filterX = filterController.con.text;
-      final query = urlApi!(pageIndexX, filterX);
+      final query = urlApi!(pageIndexX + 1, filterX);
       final apiModel = await HttpApi.apiGet(query);
       final List<T> result = [];
       setState!(() {

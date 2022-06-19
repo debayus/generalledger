@@ -67,8 +67,10 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     formCon.onSubmit = onSubmit;
+    nameCon.con.text = "test";
     emailCon.con.text = "bayusth@gmail.com";
     passwordCon.con.text = "12345678";
+    confirmPasswordCon.con.text = "12345678";
     super.onInit();
   }
 

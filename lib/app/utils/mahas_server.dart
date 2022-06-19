@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:generalledger/app/routes/app_pages.dart';
 import 'package:generalledger/app/utils/http_api.dart';
@@ -48,7 +49,15 @@ class MahasServer {
         storange.write('token', token);
         return true;
       } else {
-        await Helper.dialogWarning(r.message!);
+        var obj = r.body['message'];
+        var msg = obj['email'] != null
+            ? obj['email'].join(',')
+            : obj['name'] != null
+                ? obj['name'].join(',')
+                : obj['password'] != null
+                    ? obj['password'].join(',')
+                    : '';
+        await Helper.dialogWarning(msg);
         return false;
       }
     } catch (e) {

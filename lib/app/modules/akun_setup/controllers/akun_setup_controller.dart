@@ -25,7 +25,7 @@ class AkunSetupController extends GetxController {
   final komponenCon = InputDropdownController<String>(
     items: [
       "Neraca",
-      "Laba Rugi",
+      "Laba - Rugi",
     ],
   );
   final groupCon = InputDropdownController<StrukturAkunModel>();

@@ -24,7 +24,11 @@ class ApiResultModel {
       if (statusCode == 500 || statusCode == 404) {
         message = '$statusCode';
       } else {
-        message = body['message'];
+        try {
+          message = body['message'];
+        } catch (ex) {
+          message = '-';
+        }
       }
     }
   }
