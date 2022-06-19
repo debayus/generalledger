@@ -228,9 +228,7 @@ class Helper {
   }) {
     return Get.toNamed(
       page,
-      arguments: {
-        'back': true,
-      },
+      arguments: arguments,
       id: id,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

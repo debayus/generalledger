@@ -130,6 +130,25 @@ class AkunSetupController extends GetxController {
       };
 
       levelCon.items = masterLevel.map((e) => e.level ?? 0).toList();
+
+      AkunModel akunHeader = Get.arguments == null ? null : Get.arguments.akun == null ? null : Get.arguments.akun as AkunModel;
+      // if (akunHeader != null){
+      //   komponenCon.value = akunHeader.komponen;
+      //   groupCon.value =
+      //       masterGroup.firstWhereOrNull((e) => e.id == model.idStrukturAkun);
+      //   subGroupCon.value = masterSubGroup
+      //       .firstWhereOrNull((e) => e.id == model.idStrukturAkunDetail);
+      //   normalPosCon.value = model.normalpos;
+      //   levelCon.value = model.level;
+      //   noCon.con.text = model.no ?? "";
+      //   namaCon.con.text = model.nama ?? "";
+
+      //   groupCon.items =
+      //       masterGroup.where((e) => e.jenis == model.komponen).toList();
+      //   subGroupCon.items = masterSubGroup
+      //       .where((e) => e.idStrukturAkun == model.idStrukturAkun)
+      //       .toList();
+      // }
     };
 
     super.onInit();
