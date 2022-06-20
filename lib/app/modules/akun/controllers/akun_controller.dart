@@ -86,13 +86,16 @@ class AkunController extends GetxController {
   }
 
   void addOnTab({AkunModel? akun}) {
-    print(akun);
     Helper.toNamed(
       Routes.AKUN_SETUP,
       arguments: {
         'back': true,
-        'akun': akun,
       },
+      parameters: akun == null
+          ? null
+          : {
+              'akunHeader': '${akun.id}',
+            },
     )?.then((value) {
       if (value == true) {
         refreshItems();

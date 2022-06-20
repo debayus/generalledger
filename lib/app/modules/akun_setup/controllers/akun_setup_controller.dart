@@ -131,24 +131,47 @@ class AkunSetupController extends GetxController {
 
       levelCon.items = masterLevel.map((e) => e.level ?? 0).toList();
 
-      AkunModel akunHeader = Get.arguments == null ? null : Get.arguments.akun == null ? null : Get.arguments.akun as AkunModel;
-      // if (akunHeader != null){
-      //   komponenCon.value = akunHeader.komponen;
-      //   groupCon.value =
-      //       masterGroup.firstWhereOrNull((e) => e.id == model.idStrukturAkun);
-      //   subGroupCon.value = masterSubGroup
-      //       .firstWhereOrNull((e) => e.id == model.idStrukturAkunDetail);
-      //   normalPosCon.value = model.normalpos;
-      //   levelCon.value = model.level;
-      //   noCon.con.text = model.no ?? "";
-      //   namaCon.con.text = model.nama ?? "";
+      var akunHeaderId = Get.parameters['akunHeader'];
+      if (akunHeaderId != null) {
+        await EasyLoading.show();
+        final r = await HttpApi.apiGet('/api/akunNew/$akunHeaderId');
+        await EasyLoading.dismiss();
+        if (r.success) {
+          AkunModel model = AkunModel.fromDynamic(r.body['akun']);
+          AkunModel? child = r.body['child'] == null
+              ? null
+              : AkunModel.fromDynamic(r.body['child']);
+          KonsepAkunDetailModel? konsepAkun = r.body['konsepAkun'] == null
+              ? null
+              : KonsepAkunDetailModel.fromDynamic(r.body['konsepAkun']);
 
-      //   groupCon.items =
-      //       masterGroup.where((e) => e.jenis == model.komponen).toList();
-      //   subGroupCon.items = masterSubGroup
-      //       .where((e) => e.idStrukturAkun == model.idStrukturAkun)
-      //       .toList();
-      // }
+          // process new number
+          var newNo = child == null
+              ? 0
+              : int.parse(child.no?.substring(model.no?.length ?? 0) ?? "0");
+          newNo += 1;
+          var strNewNo =
+              '${model.no}${Helper.intToString(newNo, (konsepAkun?.jumlahdigit ?? 0) - (model.no?.length ?? 0), '0')}';
+
+          // set view
+          komponenCon.value = model.komponen;
+          groupCon.value =
+              masterGroup.firstWhereOrNull((e) => e.id == model.idStrukturAkun);
+          subGroupCon.value = masterSubGroup
+              .firstWhereOrNull((e) => e.id == model.idStrukturAkunDetail);
+          normalPosCon.value = model.normalpos;
+          levelCon.value = model.level! + 1;
+          namaCon.con.text = "";
+          noCon.con.text = strNewNo;
+          groupCon.items =
+              masterGroup.where((e) => e.jenis == model.komponen).toList();
+          subGroupCon.items = masterSubGroup
+              .where((e) => e.idStrukturAkun == model.idStrukturAkun)
+              .toList();
+        } else {
+          Helper.dialogWarning(r.message);
+        }
+      }
     };
 
     super.onInit();

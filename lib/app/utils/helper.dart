@@ -234,4 +234,14 @@ class Helper {
       parameters: parameters,
     );
   }
+
+  static String intToString(int value, int length, String character) {
+    var strVal = '$value';
+    var r = '';
+    for (var i = 0; i < length - strVal.length; i++) {
+      r += character;
+    }
+    r += strVal;
+    return r;
+  }
 }

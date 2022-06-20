@@ -49,7 +49,6 @@ class HttpApi {
         },
         body: json.encode(body),
       );
-      print(r.body);
       return getResult(r);
     } catch (ex) {
       return ApiResultModel(false, message: "$ex");
