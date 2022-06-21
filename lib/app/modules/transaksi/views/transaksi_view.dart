@@ -121,6 +121,13 @@ class TransaksiView extends GetView<TransaksiController> {
                 showUnderline: true,
                 menuName: "Set Saldo Awal",
               ),
+              ImageTextHorizontalComponent(
+                ontap: controller.jurnalManualOnTab,
+                imageMenu: false,
+                iconData: FontAwesome5.sticky_note,
+                showUnderline: true,
+                menuName: "Jurnal Manual",
+              ),
             ],
           ),
         ));

@@ -15,4 +15,5 @@ class TransaksiController extends GetxController {
   void pendapatanDiterimaDimukaOnTab() {}
   void penyesuaianHutangOnTab() {}
   void setSaldoAwalOnTab() {}
+  void jurnalManualOnTab() {}
 }

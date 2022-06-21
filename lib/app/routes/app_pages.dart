@@ -6,6 +6,10 @@ import '../modules/akun_setup/bindings/akun_setup_binding.dart';
 import '../modules/akun_setup/views/akun_setup_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/jurnal_manual/bindings/jurnal_manual_binding.dart';
+import '../modules/jurnal_manual/views/jurnal_manual_view.dart';
+import '../modules/jurnal_manual_setup/bindings/jurnal_manual_setup_binding.dart';
+import '../modules/jurnal_manual_setup/views/jurnal_manual_setup_view.dart';
 import '../modules/laporan/bindings/laporan_binding.dart';
 import '../modules/laporan/views/laporan_view.dart';
 import '../modules/laporan_neraca_saldo/bindings/laporan_neraca_saldo_binding.dart';
@@ -185,6 +189,16 @@ class AppPages {
       name: _Paths.AKUN_SETUP,
       page: () => AkunSetupView(),
       binding: AkunSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.JURNAL_MANUAL,
+      page: () => JurnalManualView(),
+      binding: JurnalManualBinding(),
+    ),
+    GetPage(
+      name: _Paths.JURNAL_MANUAL_SETUP,
+      page: () => JurnalManualSetupView(),
+      binding: JurnalManualSetupBinding(),
     ),
   ];
 }
