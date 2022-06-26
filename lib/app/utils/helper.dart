@@ -244,4 +244,10 @@ class Helper {
     r += strVal;
     return r;
   }
+
+  static String currencyFormat(double? value, {bool zeroIsEmpty = true}) {
+    final oCcy = NumberFormat("#,###.##########", "en_US");
+    var val = oCcy.format(value ?? 0);
+    return val == "0" && zeroIsEmpty ? "" : val;
+  }
 }

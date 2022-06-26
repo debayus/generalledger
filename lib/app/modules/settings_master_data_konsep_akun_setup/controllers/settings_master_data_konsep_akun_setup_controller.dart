@@ -18,7 +18,8 @@ class SettingsMasterDataKonsepAkunSetupController extends GetxController {
   );
   final levelmaxCon = InputTextController();
   final digitmaxCon = InputTextController();
-  final detailCon = InputDetailControler<KonsepAkunDetailModel>(
+  final detailCon =
+      InputDetailControler<KonsepAkunDetailModel, KonsepAkunDetailModel>(
     setKeyItem: (e) => e.level,
   );
 

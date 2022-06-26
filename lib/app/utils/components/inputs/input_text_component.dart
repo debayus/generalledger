@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:generalledger/app/utils/components/inputs/input_box_component.dart';
 import 'package:flutter/material.dart';
+import 'package:generalledger/app/utils/helper.dart';
 import 'package:generalledger/app/utils/my_config.dart';
 
 class InputTextController extends ChangeNotifier {
@@ -17,6 +18,7 @@ class InputTextController extends ChangeNotifier {
   ValueChanged<String>? onFieldSubmitted;
   FormFieldSetter<String>? onSaved;
   bool? visibility;
+  double? moneyValue;
 
   InputTextController({
     this.required = false,
@@ -52,6 +54,15 @@ class InputTextController extends ChangeNotifier {
     return valid;
   }
 
+  void onFocusChange(bool? stateFocus) {
+    if (stateFocus ?? false) {
+      con.text = moneyValue == 0 ? "" : "${moneyValue ?? ""}";
+    } else {
+      moneyValue = double.tryParse(con.text);
+      con.text = Helper.currencyFormat(moneyValue ?? 0);
+    }
+  }
+
   void setVisible(bool value) {
     setState!(() {
       visibility = value;
@@ -73,7 +84,7 @@ class InputTextController extends ChangeNotifier {
   }
 }
 
-enum InputTextType { text, email, password, number, paragraf }
+enum InputTextType { text, email, password, number, paragraf, money }
 
 class InputTextComponent extends StatefulWidget {
   final InputTextController controller;
@@ -163,6 +174,40 @@ class _InputTextComponentState extends State<InputTextComponent> {
           : null,
     );
 
+    var textFormField = TextFormField(
+      maxLines: widget.type == InputTextType.paragraf ? 4 : 1,
+      onChanged: widget.controller.onChanged,
+      onSaved: widget.controller.onSaved,
+      onTap: widget.controller.onTap,
+      onFieldSubmitted: widget.controller.onFieldSubmitted,
+      style: TextStyle(
+        color: MyConfig.fontColor,
+        fontSize: MyConfigTextSize.normal,
+      ),
+      inputFormatters: (widget.type == InputTextType.number ||
+              widget.type == InputTextType.money)
+          ? [
+              FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,10}')),
+              ...(widget.inputFormatters ?? []),
+            ]
+          : null,
+      controller: widget.controller.con,
+      validator: (v) =>
+          widget.controller.validator(v, otherValidator: widget.validator),
+      autocorrect: false,
+      enableSuggestions: false,
+      readOnly: !widget.editable,
+      obscureText: widget.type == InputTextType.password
+          ? !widget.controller.showPassword
+          : false,
+      onEditingComplete: widget.controller.onEditingComplete,
+      keyboardType: (widget.type == InputTextType.number ||
+              widget.type == InputTextType.money)
+          ? TextInputType.number
+          : null,
+      decoration: decoration,
+    );
+
     return Visibility(
       visible: widget.visibility!,
       child: InputBoxComponent(
@@ -172,38 +217,12 @@ class _InputTextComponentState extends State<InputTextComponent> {
         isRequired: widget.required,
         children: Form(
           key: widget.controller.key,
-          child: TextFormField(
-            maxLines: widget.type == InputTextType.paragraf ? 4 : 1,
-            onChanged: widget.controller.onChanged,
-            onSaved: widget.controller.onSaved,
-            onTap: widget.controller.onTap,
-            onFieldSubmitted: widget.controller.onFieldSubmitted,
-            style: TextStyle(
-              color: MyConfig.fontColor,
-              fontSize: MyConfigTextSize.normal,
-            ),
-            inputFormatters: widget.type == InputTextType.number
-                ? [
-                    FilteringTextInputFormatter.allow(
-                        RegExp(r'^(\d+)?\.?\d{0,10}')),
-                    ...(widget.inputFormatters ?? []),
-                  ]
-                : null,
-            controller: widget.controller.con,
-            validator: (v) => widget.controller
-                .validator(v, otherValidator: widget.validator),
-            autocorrect: false,
-            enableSuggestions: false,
-            readOnly: !widget.editable,
-            obscureText: widget.type == InputTextType.password
-                ? !widget.controller.showPassword
-                : false,
-            onEditingComplete: widget.controller.onEditingComplete,
-            keyboardType: widget.type == InputTextType.number
-                ? TextInputType.number
-                : null,
-            decoration: decoration,
-          ),
+          child: widget.type == InputTextType.money
+              ? Focus(
+                  child: textFormField,
+                  onFocusChange: widget.controller.onFocusChange,
+                )
+              : textFormField,
         ),
       ),
     );

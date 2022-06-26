@@ -7,12 +7,12 @@ import 'package:generalledger/app/utils/components/others/text_component.dart';
 import 'package:generalledger/app/utils/icons/font_awesome5_icons.dart';
 import 'package:generalledger/app/utils/my_config.dart';
 
-class InputDetailControler<T> {
+class InputDetailControler<T, U> {
   final Function(T)? setTitleItem;
   final Function(T)? setKeyItem;
   final Function(dynamic)? fromDynamic;
   final bool allowEdit;
-  LookupController<T> lookupCon = LookupController<T>();
+  LookupController<U> lookupCon = LookupController<U>();
   Widget Function(dynamic)? setup;
   BuildContext? context;
   String? label;
@@ -47,11 +47,12 @@ class InputDetailControler<T> {
     };
     itemEditOnPress = (e) async {
       FocusScope.of(context!).unfocus();
+      lookupCon.itemsSelectedActive = null;
       lookupCon.openEdit!(e);
       lookupCon.isSetup = true;
       await showMaterialModalBottomSheet(
         context: context!,
-        builder: (context) => LookupComponent<T>(
+        builder: (context) => LookupComponent<U>(
           controller: lookupCon,
           setup: setup,
           title: labelX,
@@ -68,13 +69,14 @@ class InputDetailControler<T> {
       lookupCon.isSetup = true;
       lookupCon.openNew!();
     } else {
+      lookupCon.isSetup = false;
       lookupCon.itemsSelected.clear();
     }
 
     FocusScope.of(context!).unfocus();
     await showMaterialModalBottomSheet(
       context: context!,
-      builder: (context) => LookupComponent<T>(
+      builder: (context) => LookupComponent<U>(
         controller: lookupCon,
         setup: setup,
         title: label,

@@ -25,7 +25,8 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
     ],
   );
   final keteranganCon = InputTextController();
-  final detailCon = InputDetailControler<StrukturAkunDetailModel>(
+  final detailCon =
+      InputDetailControler<StrukturAkunDetailModel, StrukturAkunDetailModel>(
     setKeyItem: (e) => e.id,
   );
 

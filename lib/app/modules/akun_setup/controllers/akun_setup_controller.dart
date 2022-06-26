@@ -109,6 +109,7 @@ class AkunSetupController extends GetxController {
         }
       } else {
         Helper.dialogWarning(r.message);
+        return;
       }
 
       komponenCon.onChanged = (m) {

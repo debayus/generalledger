@@ -1,5 +1,6 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-// import 'package:generalledger/app/utils/api.dart';
 import 'package:generalledger/app/utils/components/inputs/input_text_component.dart';
 import 'package:generalledger/app/utils/components/others/button_component.dart';
 import 'package:generalledger/app/utils/components/others/container_component.dart';
@@ -16,6 +17,7 @@ class LookupController<T> extends ChangeNotifier {
   Function(int, String)? urlApi;
   Function(dynamic)? setKeyItem;
   Function(dynamic)? fromDynamic;
+  final Function(String)? fromJson;
   Function()? insertOnPress;
   Function()? insertFromListOnPress;
   Function()? openNew;
@@ -29,12 +31,15 @@ class LookupController<T> extends ChangeNotifier {
     this.fromDynamic,
     this.insertOnPress,
     this.multiple = true,
+    this.fromJson,
   });
 
   List<T> items = [];
   List<T> itemsSelected = [];
+  T? itemsSelectedActive;
   T? model;
   Function(VoidCallback fn)? setState;
+  bool withSetup = false;
 
   final listViewController = ScrollController();
   final filterController = InputTextController();
@@ -87,13 +92,14 @@ class LookupController<T> extends ChangeNotifier {
       }
       if (apiModel.success) {
         ApiResultListModel listModel =
-            ApiResultListModel.fromJson(apiModel.body!);
+            ApiResultListModel.fromDynamic(apiModel.body);
         maxPage = listModel.maxPage!;
-        // pageIndex = listModel.pageIndex!;
         pageIndex = pageIndexX;
         for (var i = 0; i < (listModel.datas ?? []).length; i++) {
           if (fromDynamic != null) {
             result.add(fromDynamic!(listModel.datas![i]));
+          } else if (fromJson != null) {
+            result.add(fromJson!(jsonEncode(listModel.datas![i])));
           }
         }
       } else {
@@ -119,27 +125,44 @@ class LookupController<T> extends ChangeNotifier {
       final currentScroll = listViewController.position.pixels;
       final delta = 0.0;
       if (maxScroll - currentScroll <= delta && pageIndex != maxPage) {
-        setState!(() {
-          loadingBottom = true;
-        });
+        loadingBottom = true;
         await refreshBottom(nextPage: true);
-        setState!(() {
-          loadingBottom = false;
-        });
+        loadingBottom = false;
       }
     });
     refreshItems();
   }
 
+  Future<bool> backOnPressed() async {
+    if (withSetup && isSetup && itemsSelectedActive != null) {
+      setState!(() {
+        isSetup = false;
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   void itemOnTab(T e) {
+    if (setKeyItem == null) {
+      throw Exception("LookUp.setKeyItem must be required");
+    }
     final item = itemsSelected
         .where((element) => setKeyItem!(element) == setKeyItem!(e));
+
     setState!(() {
       if (item.isEmpty) {
         if (!multiple) {
           itemsSelected = [];
         }
-        itemsSelected.add(e);
+        if (withSetup) {
+          isSetup = true;
+          itemsSelectedActive = e;
+          openNew!();
+        } else {
+          itemsSelected.add(e);
+        }
       } else {
         if (!multiple) {
           insertFromListOnPress!();
@@ -158,7 +181,7 @@ class LookupController<T> extends ChangeNotifier {
 class LookupComponent<T> extends StatefulWidget {
   final String? title;
   final LookupController<T> controller;
-  final Function(dynamic)? setItemLabel;
+  final Function(T)? setItemLabel;
   final Widget Function(dynamic)? child;
   final Widget Function(dynamic)? setup;
 
@@ -184,143 +207,151 @@ class _LookupComponentState extends State<LookupComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? ""),
-        centerTitle: true,
-      ),
-      body: StatefulBuilder(
-        builder: (
-          context,
-          setState,
-        ) =>
-            widget.controller.isSetup
-                ? ContainerComponent(
-                    child: Column(
-                      children: [
-                        widget.setup!(widget.controller.model),
-                        ButtonComponent(
-                          label: 'Insert',
-                          onPressed: widget.controller.insertOnPress,
-                        )
-                      ],
-                    ),
-                  )
-                : Column(
-                    children: [
-                      InputTextComponent(
-                        borderRadius: Radius.zero,
-                        placeHolder: 'Search',
-                        marginBottom: 0,
-                        controller: widget.controller.filterController,
+    return WillPopScope(
+      onWillPop: widget.controller.backOnPressed,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title ?? ""),
+          centerTitle: true,
+        ),
+        body: StatefulBuilder(
+          builder: (
+            context,
+            setState,
+          ) =>
+              widget.controller.isSetup
+                  ? ContainerComponent(
+                      child: Column(
+                        children: [
+                          widget.setup!(widget.controller.model),
+                          ButtonComponent(
+                            label: 'Insert',
+                            onPressed: widget.controller.insertOnPress,
+                          )
+                        ],
                       ),
-                      Expanded(
-                        child: RefreshIndicator(
-                          color: MyConfig.primaryColor.shade800,
-                          backgroundColor: MyConfig.primaryColor.shade600,
-                          onRefresh: widget.controller.refreshItems,
-                          child: widget.controller.isItemRefresh
-                              ? ShimmerComponent()
-                              : widget.controller.items.isEmpty &&
-                                      !widget.controller.isItemRefresh
-                                  ? Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          FontAwesome5.box_open,
-                                          color: MyConfig.primaryColor.shade600,
-                                          size: 40,
-                                        ),
-                                        Padding(padding: EdgeInsets.all(5)),
-                                        TextComponent("No Item Found"),
-                                        Padding(padding: EdgeInsets.all(5)),
-                                        TextButton(
-                                          onPressed:
-                                              widget.controller.refreshItems,
-                                          child: TextComponent(
-                                            "Refresh",
-                                            color: Colors.lightBlue,
+                    )
+                  : Column(
+                      children: [
+                        InputTextComponent(
+                          borderRadius: Radius.zero,
+                          placeHolder: 'Search',
+                          marginBottom: 0,
+                          controller: widget.controller.filterController,
+                        ),
+                        Expanded(
+                          child: RefreshIndicator(
+                            color: MyConfig.primaryColor.shade800,
+                            backgroundColor: MyConfig.primaryColor.shade600,
+                            onRefresh: widget.controller.refreshItems,
+                            child: widget.controller.isItemRefresh
+                                ? ShimmerComponent()
+                                : widget.controller.items.isEmpty &&
+                                        !widget.controller.isItemRefresh
+                                    ? Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            FontAwesome5.box_open,
+                                            color:
+                                                MyConfig.primaryColor.shade600,
+                                            size: 40,
                                           ),
-                                        )
-                                      ],
-                                    )
-                                  : ListView.separated(
-                                      separatorBuilder: (context, index) =>
-                                          DividerComponent(),
-                                      controller:
-                                          widget.controller.listViewController,
-                                      physics: AlwaysScrollableScrollPhysics(),
-                                      itemCount:
-                                          widget.controller.items.length + 1,
-                                      itemBuilder: (context, index) {
-                                        if (index ==
-                                            widget.controller.items.length) {
-                                          return Visibility(
-                                            visible: widget
-                                                        .controller.pageIndex !=
-                                                    widget.controller.maxPage &&
-                                                widget.controller.items
-                                                    .isNotEmpty,
-                                            child: Container(
-                                              margin: EdgeInsets.all(10),
-                                              child: Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: MyConfig
-                                                      .primaryColor.shade600,
+                                          Padding(padding: EdgeInsets.all(5)),
+                                          TextComponent("No Item Found"),
+                                          Padding(padding: EdgeInsets.all(5)),
+                                          TextButton(
+                                            onPressed:
+                                                widget.controller.refreshItems,
+                                            child: TextComponent(
+                                              "Refresh",
+                                              color: Colors.lightBlue,
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    : ListView.separated(
+                                        separatorBuilder: (context, index) =>
+                                            DividerComponent(),
+                                        controller: widget
+                                            .controller.listViewController,
+                                        physics:
+                                            AlwaysScrollableScrollPhysics(),
+                                        itemCount:
+                                            widget.controller.items.length + 1,
+                                        itemBuilder: (context, index) {
+                                          if (index ==
+                                              widget.controller.items.length) {
+                                            return Visibility(
+                                              visible:
+                                                  widget.controller.pageIndex !=
+                                                          widget.controller
+                                                              .maxPage &&
+                                                      widget.controller.items
+                                                          .isNotEmpty,
+                                              child: Container(
+                                                margin: EdgeInsets.all(10),
+                                                child: Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: MyConfig
+                                                        .primaryColor.shade600,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        } else {
-                                          return Container(
-                                            child: widget.child != null
-                                                ? widget.child!(widget
-                                                    .controller.items[index])
-                                                : ListTile(
-                                                    tileColor: widget.controller
-                                                            .itemsSelected
-                                                            .where((element) =>
-                                                                widget.controller
-                                                                        .setKeyItem!(
-                                                                    element) ==
-                                                                widget
-                                                                    .controller
-                                                                    .setKeyItem!(widget
-                                                                        .controller
-                                                                        .items[
-                                                                    index]))
-                                                            .isEmpty
-                                                        ? null
-                                                        : MyConfig.primaryColor
-                                                            .shade400,
-                                                    title: TextComponent(
-                                                      widget.setItemLabel!(
-                                                          widget.controller
+                                            );
+                                          } else {
+                                            return Container(
+                                              child: widget.child != null
+                                                  ? widget.child!(widget
+                                                      .controller.items[index])
+                                                  : ListTile(
+                                                      tileColor: widget
+                                                              .controller
+                                                              .itemsSelected
+                                                              .where((element) =>
+                                                                  widget.controller
+                                                                          .setKeyItem!(
+                                                                      element) ==
+                                                                  widget
+                                                                      .controller
+                                                                      .setKeyItem!(widget
+                                                                          .controller
+                                                                          .items[
+                                                                      index]))
+                                                              .isEmpty
+                                                          ? null
+                                                          : MyConfig
+                                                              .primaryColor
+                                                              .shade400,
+                                                      title: TextComponent(
+                                                        widget.setItemLabel!(
+                                                            widget.controller
+                                                                .items[index]),
+                                                      ),
+                                                      onTap: () => widget
+                                                          .controller
+                                                          .itemOnTab(widget
+                                                              .controller
                                                               .items[index]),
                                                     ),
-                                                    onTap: () => widget
-                                                        .controller
-                                                        .itemOnTab(widget
-                                                            .controller
-                                                            .items[index]),
-                                                  ),
-                                          );
-                                        }
-                                      },
-                                    ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                          ),
                         ),
-                      ),
-                      ButtonComponent(
-                        borderRadius: Radius.zero,
-                        label: 'Insert',
-                        onPressed: widget.controller.insertFromListOnPress,
-                      ),
-                    ],
-                  ),
+                        ButtonComponent(
+                          borderRadius: Radius.zero,
+                          label: 'Insert',
+                          onPressed: widget.controller.insertFromListOnPress,
+                        ),
+                      ],
+                    ),
+        ),
       ),
     );
   }

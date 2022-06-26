@@ -14,6 +14,11 @@ class AkunModel {
   String? idStrukturAkunNama;
   String? idStrukturAkunDetailNama;
 
+  // forDetail
+  double? debit;
+  double? kredit;
+  String? catatan;
+
   static fromJson(String jsonString) {
     final data = json.decode(jsonString);
     return fromDynamic(data);
