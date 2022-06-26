@@ -4,13 +4,14 @@ import 'package:generalledger/app/utils/components/pages/list_page_component.dar
 
 import 'package:get/get.dart';
 
-import '../controllers/jurnal_manual_controller.dart';
+import '../controllers/transaksi_jurnal_manual_controller.dart';
 
-class JurnalManualView extends GetView<JurnalManualController> {
+class TransaksiJurnalManualView
+    extends GetView<TransaksiJurnalManualController> {
   @override
   Widget build(BuildContext context) => ListPageComponent<JurnalModel>(
         controller: controller.listCon,
-        title: 'Jurnal',
+        title: 'Jurnal Umum',
         getTitle: (e) => e.no ?? "-",
       );
 }

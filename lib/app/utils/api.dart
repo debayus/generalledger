@@ -3,8 +3,8 @@
 // import 'package:generalledger/app/utils/models/api_result_model.dart';
 
 class Api {
-  static String urlApi = 'http://192.168.0.109:8000';
-  // static String urlApi = 'http://192.168.1.141:8000';
+  // static String urlApi = 'http://192.168.0.109:8000';
+  static String urlApi = 'http://192.168.1.141:8000';
 
   // static String setErrorMessage(dynamic error) {
   //   if (error is DioError) {

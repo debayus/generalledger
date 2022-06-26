@@ -36,8 +36,9 @@ abstract class Routes {
   static const SETTINGS_MASTER_DATA_KONSEP_AKUN_SETUP =
       _Paths.SETTINGS_MASTER_DATA_KONSEP_AKUN_SETUP;
   static const AKUN_SETUP = _Paths.AKUN_SETUP;
-  static const JURNAL_MANUAL = _Paths.JURNAL_MANUAL;
-  static const JURNAL_MANUAL_SETUP = _Paths.JURNAL_MANUAL_SETUP;
+  static const TRANSAKSI_JURNAL_MANUAL = _Paths.TRANSAKSI_JURNAL_MANUAL;
+  static const TRANSAKSI_JURNAL_MANUAL_SETUP =
+      _Paths.TRANSAKSI_JURNAL_MANUAL_SETUP;
 }
 
 abstract class _Paths {
@@ -73,6 +74,6 @@ abstract class _Paths {
   static const SETTINGS_MASTER_DATA_KONSEP_AKUN_SETUP =
       '/settings-master-data-konsep-akun-setup';
   static const AKUN_SETUP = '/akun-setup';
-  static const JURNAL_MANUAL = '/jurnal-manual';
-  static const JURNAL_MANUAL_SETUP = '/jurnal-manual-setup';
+  static const TRANSAKSI_JURNAL_MANUAL = '/transaksi-jurnal-manual';
+  static const TRANSAKSI_JURNAL_MANUAL_SETUP = '/transaksi-jurnal-manual-setup';
 }

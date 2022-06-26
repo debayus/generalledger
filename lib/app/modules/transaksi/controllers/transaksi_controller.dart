@@ -1,3 +1,5 @@
+import 'package:generalledger/app/routes/app_pages.dart';
+import 'package:generalledger/app/utils/helper.dart';
 import 'package:get/get.dart';
 
 class TransaksiController extends GetxController {
@@ -15,5 +17,7 @@ class TransaksiController extends GetxController {
   void pendapatanDiterimaDimukaOnTab() {}
   void penyesuaianHutangOnTab() {}
   void setSaldoAwalOnTab() {}
-  void jurnalManualOnTab() {}
+  void jurnalManualOnTab() {
+    Helper.toNamed(Routes.TRANSAKSI_JURNAL_MANUAL);
+  }
 }

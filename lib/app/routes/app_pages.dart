@@ -6,10 +6,6 @@ import '../modules/akun_setup/bindings/akun_setup_binding.dart';
 import '../modules/akun_setup/views/akun_setup_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/jurnal_manual/bindings/jurnal_manual_binding.dart';
-import '../modules/jurnal_manual/views/jurnal_manual_view.dart';
-import '../modules/jurnal_manual_setup/bindings/jurnal_manual_setup_binding.dart';
-import '../modules/jurnal_manual_setup/views/jurnal_manual_setup_view.dart';
 import '../modules/laporan/bindings/laporan_binding.dart';
 import '../modules/laporan/views/laporan_view.dart';
 import '../modules/laporan_neraca_saldo/bindings/laporan_neraca_saldo_binding.dart';
@@ -50,6 +46,10 @@ import '../modules/settings_master_data_struktur_akun_setup/bindings/settings_ma
 import '../modules/settings_master_data_struktur_akun_setup/views/settings_master_data_struktur_akun_setup_view.dart';
 import '../modules/transaksi/bindings/transaksi_binding.dart';
 import '../modules/transaksi/views/transaksi_view.dart';
+import '../modules/transaksi_jurnal_manual/bindings/transaksi_jurnal_manual_binding.dart';
+import '../modules/transaksi_jurnal_manual/views/transaksi_jurnal_manual_view.dart';
+import '../modules/transaksi_jurnal_manual_setup/bindings/transaksi_jurnal_manual_setup_binding.dart';
+import '../modules/transaksi_jurnal_manual_setup/views/transaksi_jurnal_manual_setup_view.dart';
 import '../modules/transaksi_pengeluaran_tunai/bindings/transaksi_pengeluaran_tunai_binding.dart';
 import '../modules/transaksi_pengeluaran_tunai/views/transaksi_pengeluaran_tunai_view.dart';
 
@@ -191,14 +191,14 @@ class AppPages {
       binding: AkunSetupBinding(),
     ),
     GetPage(
-      name: _Paths.JURNAL_MANUAL,
-      page: () => JurnalManualView(),
-      binding: JurnalManualBinding(),
+      name: _Paths.TRANSAKSI_JURNAL_MANUAL,
+      page: () => TransaksiJurnalManualView(),
+      binding: TransaksiJurnalManualBinding(),
     ),
     GetPage(
-      name: _Paths.JURNAL_MANUAL_SETUP,
-      page: () => JurnalManualSetupView(),
-      binding: JurnalManualSetupBinding(),
+      name: _Paths.TRANSAKSI_JURNAL_MANUAL_SETUP,
+      page: () => TransaksiJurnalManualSetupView(),
+      binding: TransaksiJurnalManualSetupBinding(),
     ),
   ];
 }

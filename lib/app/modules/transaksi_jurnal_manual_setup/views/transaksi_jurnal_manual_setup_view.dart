@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/jurnal_manual_setup_controller.dart';
+import '../controllers/transaksi_jurnal_manual_setup_controller.dart';
 
-class JurnalManualSetupView extends GetView<JurnalManualSetupController> {
+class TransaksiJurnalManualSetupView
+    extends GetView<TransaksiJurnalManualSetupController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('JurnalManualSetupView'),
+        title: Text('TransaksiJurnalManualSetupView'),
         centerTitle: true,
       ),
       body: Center(
         child: Text(
-          'JurnalManualSetupView is working',
+          'TransaksiJurnalManualSetupView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),
