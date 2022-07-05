@@ -18,6 +18,8 @@ class SettingsMasterDataProyekSetupController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
+
     formCon.isValid = () {
       if (!namaCon.key.currentState!.validate()) return false;
       return true;
@@ -29,8 +31,6 @@ class SettingsMasterDataProyekSetupController extends GetxController {
       ProyekModel model = ProyekModel.fromDynamic(jsonString);
       namaCon.con.text = model.nama!;
     };
-
-    super.onInit();
   }
 
   @override

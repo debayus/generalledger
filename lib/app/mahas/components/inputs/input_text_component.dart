@@ -4,6 +4,8 @@ import 'package:generalledger/app/mahas/components/inputs/input_box_component.da
 import 'package:generalledger/app/mahas/my_config.dart';
 import 'package:generalledger/app/mahas/services/helper.dart';
 
+enum InputTextType { text, email, password, number, paragraf, money }
+
 class InputTextController extends ChangeNotifier {
   bool required = false;
   InputTextType type = InputTextType.text;
@@ -84,7 +86,14 @@ class InputTextController extends ChangeNotifier {
   }
 }
 
-enum InputTextType { text, email, password, number, paragraf, money }
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
 
 class InputTextComponent extends StatefulWidget {
   final InputTextController controller;
