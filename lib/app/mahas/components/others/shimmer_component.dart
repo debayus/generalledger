@@ -1,7 +1,7 @@
-import 'package:generalledger/app/utils/components/others/divider_component.dart';
 import 'package:flutter/material.dart';
+import 'package:generalledger/app/mahas/components/others/divider_component.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:generalledger/app/utils/my_config.dart';
 
 class ShimmerComponent extends StatelessWidget {
   const ShimmerComponent({Key? key}) : super(key: key);

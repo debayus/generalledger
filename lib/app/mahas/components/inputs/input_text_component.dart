@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
-import 'package:generalledger/app/utils/components/inputs/input_box_component.dart';
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/helper.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_box_component.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
 
 class InputTextController extends ChangeNotifier {
   bool required = false;

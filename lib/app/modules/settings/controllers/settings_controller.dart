@@ -1,6 +1,6 @@
+import 'package:generalledger/app/mahas/services/helper.dart';
 import 'package:generalledger/app/routes/app_pages.dart';
-import 'package:generalledger/app/utils/helper.dart';
-import 'package:generalledger/app/utils/mahas_server.dart';
+import 'package:generalledger/app/mahas/services/mahas_server.dart';
 import 'package:get/get.dart';
 
 class SettingsController extends GetxController {

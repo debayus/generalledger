@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
-import 'package:generalledger/app/utils/icons/font_awesome5_icons.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/icons/font_awesome5_icons.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
 
 class InputBoxComponent extends StatelessWidget {
   final String? label;
@@ -74,7 +74,6 @@ class InputBoxComponent extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    // color: MyConfig.primaryColor.shade700,
                     color: MyConfig.fontColor.withOpacity(.05),
                     border: errorMessage != null
                         ? Border.all(color: Colors.red.shade700, width: .8)
@@ -107,7 +106,6 @@ class InputBoxComponent extends StatelessWidget {
                                 onTap: clearOnTab,
                                 child: Icon(
                                   FontAwesome5.times,
-                                  // color: Colors.white.withOpacity(.5),
                                   size: 14,
                                 ),
                               ),
@@ -122,7 +120,6 @@ class InputBoxComponent extends StatelessWidget {
                                 onTap: onTap,
                                 child: Icon(
                                   icon,
-                                  // color: Colors.white.withOpacity(.5),
                                   size: 14,
                                 ),
                               ),

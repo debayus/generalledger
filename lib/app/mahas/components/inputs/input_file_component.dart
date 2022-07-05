@@ -1,7 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/components/inputs/input_box_component.dart';
-import 'package:generalledger/app/utils/icons/font_awesome5_icons.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_box_component.dart';
+import 'package:generalledger/app/mahas/icons/font_awesome5_icons.dart';
 
 class InputFileController {
   List<PlatformFile> files = List<PlatformFile>.empty(growable: true);

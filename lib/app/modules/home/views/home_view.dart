@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/components/others/container_component.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
-import 'package:generalledger/app/utils/icons/font_awesome5_icons.dart';
-import 'package:generalledger/app/utils/mahas_server.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/components/others/container_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/icons/font_awesome5_icons.dart';
+import 'package:generalledger/app/mahas/services/mahas_server.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
 
 import 'package:get/get.dart';
 

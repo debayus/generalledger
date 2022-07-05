@@ -1,6 +1,6 @@
 import 'package:generalledger/app/models/proyek_model.dart';
 import 'package:generalledger/app/routes/app_pages.dart';
-import 'package:generalledger/app/utils/components/pages/list_page_component.dart';
+import 'package:generalledger/app/mahas/components/pages/list_page_component.dart';
 import 'package:get/get.dart';
 
 class SettingsMasterDataProyekController extends GetxController {

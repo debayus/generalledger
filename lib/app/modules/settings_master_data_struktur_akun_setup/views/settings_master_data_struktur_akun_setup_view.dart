@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:generalledger/app/models/struktur_akun_model.dart';
-import 'package:generalledger/app/utils/components/inputs/input_checkbox_component.dart';
-import 'package:generalledger/app/utils/components/inputs/input_detail_component.dart';
-import 'package:generalledger/app/utils/components/inputs/input_dropdown_component.dart';
-import 'package:generalledger/app/utils/components/inputs/input_text_component.dart';
-import 'package:generalledger/app/utils/components/others/container_component.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
-import 'package:generalledger/app/utils/components/pages/setup_page_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_checkbox_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_detail_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_dropdown_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_text_component.dart';
+import 'package:generalledger/app/mahas/components/others/container_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/components/pages/setup_page_component.dart';
 
 import 'package:get/get.dart';
 

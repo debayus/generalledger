@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
 
 class ButtonComponent extends StatelessWidget {
   final String? label;

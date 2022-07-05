@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:generalledger/app/models/jurnal_model.dart';
-import 'package:generalledger/app/utils/components/pages/list_page_component.dart';
+import 'package:generalledger/app/mahas/components/pages/list_page_component.dart';
 
 import 'package:get/get.dart';
 

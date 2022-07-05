@@ -1,9 +1,9 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:generalledger/app/routes/app_pages.dart';
-import 'package:generalledger/app/utils/components/inputs/input_text_component.dart';
-import 'package:generalledger/app/utils/components/pages/setup_page_component.dart';
-import 'package:generalledger/app/utils/helper.dart';
-import 'package:generalledger/app/utils/http_api.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_text_component.dart';
+import 'package:generalledger/app/mahas/components/pages/setup_page_component.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
+import 'package:generalledger/app/mahas/services/http_api.dart';
 import 'package:get/get.dart';
 
 class LoginRegisterController extends GetxController {

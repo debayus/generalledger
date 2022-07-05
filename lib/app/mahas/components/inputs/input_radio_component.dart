@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/components/inputs/input_box_component.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_box_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
 
 class RadioButtonItem {
   dynamic id;

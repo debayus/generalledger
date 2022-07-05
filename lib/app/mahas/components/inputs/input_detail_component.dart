@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:generalledger/app/mahas/components/inputs/lookup_component.dart';
+import 'package:generalledger/app/mahas/components/others/container_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/icons/font_awesome5_icons.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:generalledger/app/utils/components/inputs/lookup_component.dart';
-import 'package:generalledger/app/utils/components/others/container_component.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
-import 'package:generalledger/app/utils/icons/font_awesome5_icons.dart';
-import 'package:generalledger/app/utils/my_config.dart';
 
 class InputDetailControler<T, U> {
   final Function(T)? setTitleItem;

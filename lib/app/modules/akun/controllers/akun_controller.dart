@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
 import 'package:generalledger/app/models/akun_model.dart';
 import 'package:generalledger/app/routes/app_pages.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
-import 'package:generalledger/app/utils/components/pages/list_page_component.dart';
-import 'package:generalledger/app/utils/helper.dart';
-import 'package:generalledger/app/utils/http_api.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/components/pages/list_page_component.dart';
+import 'package:generalledger/app/mahas/services/http_api.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
 import 'package:get/get.dart';
 import 'package:tree_view/tree_view.dart';
 
@@ -48,7 +48,7 @@ class AkunController extends GetxController {
                 ),
                 trailing: PopupMenuButton(
                   iconSize: 16,
-                  onSelected: (v) => popupMenuButtonOnSelected(v as String, e),
+                  onSelected: (v) => popupMenuButtonOnSelected(v, e),
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem(
                       value: 'Tambah Detail',

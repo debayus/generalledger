@@ -3,13 +3,13 @@ import 'package:generalledger/app/models/akun_model.dart';
 import 'package:generalledger/app/models/jurnal_model.dart';
 import 'package:generalledger/app/models/proyek_model.dart';
 import 'package:generalledger/app/routes/app_pages.dart';
-import 'package:generalledger/app/utils/components/inputs/input_datetime_component.dart';
-import 'package:generalledger/app/utils/components/inputs/input_detail_component.dart';
-import 'package:generalledger/app/utils/components/inputs/input_dropdown_component.dart';
-import 'package:generalledger/app/utils/components/inputs/input_text_component.dart';
-import 'package:generalledger/app/utils/components/pages/setup_page_component.dart';
-import 'package:generalledger/app/utils/helper.dart';
-import 'package:generalledger/app/utils/http_api.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_datetime_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_detail_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_dropdown_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_text_component.dart';
+import 'package:generalledger/app/mahas/components/pages/setup_page_component.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
+import 'package:generalledger/app/mahas/services/http_api.dart';
 import 'package:get/get.dart';
 
 class TransaksiJurnalManualSetupController extends GetxController {
@@ -67,10 +67,10 @@ class TransaksiJurnalManualSetupController extends GetxController {
     formCon.setModelView = (jsonString) {
       JurnalModel model = JurnalModel.fromDynamic(jsonString);
 
-      final noCon = InputTextController();
-      final tanggalCon = InputTextController();
-      final catatanCon = InputTextController();
-      final idPreyekCon = InputTextController();
+      // final noCon = InputTextController();
+      // final tanggalCon = InputTextController();
+      // final catatanCon = InputTextController();
+      // final idPreyekCon = InputTextController();
 
       // namaCon.con.text = model.nama!;
       // telpCon.con.text = model.telp ?? "";

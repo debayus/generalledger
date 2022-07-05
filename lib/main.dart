@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:generalledger/app/utils/helper.dart';
-import 'package:generalledger/app/utils/mahas_server.dart';
+import 'package:generalledger/app/mahas/services/mahas_server.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -14,7 +14,7 @@ void main() async {
   final page = await MahasServer.init();
   setPathUrlStrategy();
   runApp(MyApp(
-      page: page,
+    page: page,
   ));
 }
 

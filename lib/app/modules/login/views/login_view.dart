@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/components/inputs/input_text_component.dart';
-import 'package:generalledger/app/utils/components/pages/setup_page_component.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_text_component.dart';
+import 'package:generalledger/app/mahas/components/pages/setup_page_component.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
 import 'package:get/get.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {

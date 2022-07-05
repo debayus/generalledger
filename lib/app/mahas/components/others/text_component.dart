@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
 
 enum TextSize {
   h1,

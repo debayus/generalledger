@@ -1,17 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/components/inputs/input_text_component.dart';
-import 'package:generalledger/app/utils/components/others/button_component.dart';
-import 'package:generalledger/app/utils/components/others/container_component.dart';
-import 'package:generalledger/app/utils/components/others/divider_component.dart';
-import 'package:generalledger/app/utils/components/others/shimmer_component.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
-import 'package:generalledger/app/utils/helper.dart';
-import 'package:generalledger/app/utils/http_api.dart';
-import 'package:generalledger/app/utils/icons/font_awesome5_icons.dart';
-import 'package:generalledger/app/utils/models/api_result_list_model.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_text_component.dart';
+import 'package:generalledger/app/mahas/components/others/button_component.dart';
+import 'package:generalledger/app/mahas/components/others/container_component.dart';
+import 'package:generalledger/app/mahas/components/others/divider_component.dart';
+import 'package:generalledger/app/mahas/components/others/shimmer_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/icons/font_awesome5_icons.dart';
+import 'package:generalledger/app/mahas/models/api_result_list_model.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
+import 'package:generalledger/app/mahas/services/http_api.dart';
 
 class LookupController<T> extends ChangeNotifier {
   Function(int, String)? urlApi;

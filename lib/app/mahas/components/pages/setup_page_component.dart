@@ -1,18 +1,16 @@
-// import 'dart:html' as html;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:generalledger/app/utils/http_api.dart';
+import 'package:generalledger/app/mahas/components/others/button_component.dart';
+import 'package:generalledger/app/mahas/components/others/container_component.dart';
+import 'package:generalledger/app/mahas/components/others/shimmer_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/icons/font_awesome5_icons.dart';
+import 'package:generalledger/app/mahas/models/api_result_model.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
+import 'package:generalledger/app/mahas/services/http_api.dart';
 import 'package:get/get.dart';
-// import 'package:generalledger/app/utils/api.dart';
-import 'package:generalledger/app/utils/components/others/button_component.dart';
-import 'package:generalledger/app/utils/components/others/container_component.dart';
-import 'package:generalledger/app/utils/components/others/shimmer_component.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
-import 'package:generalledger/app/utils/helper.dart';
-import 'package:generalledger/app/utils/icons/font_awesome5_icons.dart';
-import 'package:generalledger/app/utils/models/api_result_model.dart';
-import 'package:generalledger/app/utils/my_config.dart';
 
 class SetupPageController extends ChangeNotifier {
   final Function(dynamic)? urlApiGet;

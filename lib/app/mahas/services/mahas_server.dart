@@ -1,9 +1,9 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:generalledger/app/mahas/my_config.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
 import 'package:generalledger/app/routes/app_pages.dart';
-import 'package:generalledger/app/utils/http_api.dart';
-import 'package:generalledger/app/utils/my_config.dart';
+import 'package:generalledger/app/mahas/services/http_api.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:generalledger/app/utils/helper.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class MahasServer {

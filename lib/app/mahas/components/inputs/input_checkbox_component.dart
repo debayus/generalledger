@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/utils/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
 
 class InputCheckboxController {
   bool checked = false;

@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:generalledger/app/utils/api.dart';
-import 'package:generalledger/app/utils/mahas_server.dart';
-import 'package:generalledger/app/utils/models/api_result_model.dart';
+import 'package:generalledger/app/mahas/models/api_result_model.dart';
+import 'package:generalledger/app/mahas/services/api.dart';
+import 'package:generalledger/app/mahas/services/mahas_server.dart';
 import 'package:http/http.dart' as http;
 
 class HttpApi {
