@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:generalledger/app/mahas/services/http_api.dart';
 
 class MyConfig {
+  static String server = 'Laravel';
+  static String urlApi = 'http://192.168.1.51:8000';
+
   static const Color fontColor = Colors.black;
   static const Color backgroundColor = Colors.white;
   static const MaterialColor primaryColor = MaterialColor(
