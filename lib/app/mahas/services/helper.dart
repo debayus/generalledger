@@ -87,7 +87,7 @@ class Helper {
     );
   }
 
-  static Future dialogQuesion({
+  static Future dialogQuestion({
     String? message,
     IconData? icon,
     String? submitText,
@@ -204,7 +204,7 @@ class Helper {
     dynamic parametes,
   }) async {
     if (questionBack && editable) {
-      final r = await Helper.dialogQuesion(
+      final r = await Helper.dialogQuestion(
         message: 'Are you sure you want to come back ?',
         submitText: 'Yes',
       );

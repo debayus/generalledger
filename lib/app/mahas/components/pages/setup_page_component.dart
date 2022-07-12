@@ -123,7 +123,7 @@ class SetupPageController extends ChangeNotifier {
   Future<bool> onWillPop() async {
     if (!questionBack) return true;
     if (editable) {
-      final r = await Helper.dialogQuesion(
+      final r = await Helper.dialogQuestion(
         message: 'Are you sure you want to come back ?',
         submitText: 'Yes',
       );
@@ -146,7 +146,7 @@ class SetupPageController extends ChangeNotifier {
       editable = false;
       setState!(() {});
     } else if (v == 'Delete') {
-      final r = await Helper.dialogQuesion(
+      final r = await Helper.dialogQuestion(
         message: 'Are you sure to delete this item ?',
         icon: FontAwesome5.trash,
         submitText: 'Delete',
