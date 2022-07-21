@@ -43,6 +43,7 @@ abstract class Routes {
   static const XSAMPLE_INPUT = _Paths.XSAMPLE_INPUT;
   static const XSAMPLE_CHECKBOX_RADIO = _Paths.XSAMPLE_CHECKBOX_RADIO;
   static const XSAMPLE_DATE_TIME = _Paths.XSAMPLE_DATE_TIME;
+  static const XSAMPLE_DROP_DOWN = _Paths.XSAMPLE_DROP_DOWN;
 }
 
 abstract class _Paths {
@@ -84,4 +85,5 @@ abstract class _Paths {
   static const XSAMPLE_INPUT = '/xsample-input';
   static const XSAMPLE_CHECKBOX_RADIO = '/xsample-checkbox-radio';
   static const XSAMPLE_DATE_TIME = '/xsample-date-time';
+  static const XSAMPLE_DROP_DOWN = '/xsample-drop-down';
 }

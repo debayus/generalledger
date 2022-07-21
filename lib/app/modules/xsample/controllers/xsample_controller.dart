@@ -14,4 +14,8 @@ class XsampleController extends GetxController {
   void dateTimeOnPress() {
     Helper.toNamed(Routes.XSAMPLE_DATE_TIME);
   }
+
+  void dropdownOnPress() {
+    Helper.toNamed(Routes.XSAMPLE_DROP_DOWN);
+  }
 }

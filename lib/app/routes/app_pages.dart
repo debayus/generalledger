@@ -58,6 +58,8 @@ import '../modules/xsample_checkbox_radio/bindings/xsample_checkbox_radio_bindin
 import '../modules/xsample_checkbox_radio/views/xsample_checkbox_radio_view.dart';
 import '../modules/xsample_date_time/bindings/xsample_date_time_binding.dart';
 import '../modules/xsample_date_time/views/xsample_date_time_view.dart';
+import '../modules/xsample_drop_down/bindings/xsample_drop_down_binding.dart';
+import '../modules/xsample_drop_down/views/xsample_drop_down_view.dart';
 import '../modules/xsample_input/bindings/xsample_input_binding.dart';
 import '../modules/xsample_input/views/xsample_input_view.dart';
 
@@ -227,6 +229,11 @@ class AppPages {
       name: _Paths.XSAMPLE_DATE_TIME,
       page: () => const XsampleDateTimeView(),
       binding: XsampleDateTimeBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_DROP_DOWN,
+      page: () => const XsampleDropDownView(),
+      binding: XsampleDropDownBinding(),
     ),
   ];
 }

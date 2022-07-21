@@ -39,6 +39,11 @@ class XsampleView extends GetView<XsampleController> {
                 iconData: FontAwesome5.rocket,
                 menuName: "Date & Time",
               ),
+              ImageTextHorizontalComponent(
+                ontap: controller.dropdownOnPress,
+                iconData: FontAwesome5.rocket,
+                menuName: "Drop down",
+              ),
             ],
           ),
         ));

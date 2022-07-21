@@ -14,6 +14,7 @@ class InputBoxComponent extends StatelessWidget {
   final String? errorMessage;
   final IconData? icon;
   final bool? isRequired;
+  final bool? editable;
   final Function()? clearOnTab;
 
   const InputBoxComponent({
@@ -29,6 +30,7 @@ class InputBoxComponent extends StatelessWidget {
     this.errorMessage,
     this.isRequired = false,
     this.icon,
+    this.editable,
   }) : super(key: key);
 
   @override
@@ -74,7 +76,8 @@ class InputBoxComponent extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: MyConfig.fontColor.withOpacity(.01),
+                    color: MyConfig.fontColor
+                        .withOpacity(editable ?? false ? .01 : .05),
                     border: errorMessage != null
                         ? Border.all(color: Colors.red.shade700, width: .8)
                         : Border.all(color: MyConfig.fontColor, width: .1),

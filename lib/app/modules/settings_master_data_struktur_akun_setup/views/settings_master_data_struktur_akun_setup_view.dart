@@ -27,7 +27,6 @@ class SettingsMasterDataStrukturAkunSetupView
               children: [
                 InputDropdownComponent(
                   controller: controller.jenisCon,
-                  itemLabel: (e) => e as String,
                   label: 'Jenis',
                   required: true,
                   editable: controller.formCon.editable,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:generalledger/app/models/jurnal_model.dart';
-import 'package:generalledger/app/models/proyek_model.dart';
 import 'package:generalledger/app/mahas/components/inputs/input_datetime_component.dart';
 import 'package:generalledger/app/mahas/components/inputs/input_detail_component.dart';
 import 'package:generalledger/app/mahas/components/inputs/input_dropdown_component.dart';
@@ -33,10 +32,9 @@ class TransaksiJurnalManualSetupView
                   controller: controller.noCon,
                   editable: false,
                 ),
-                InputDropdownComponent<ProyekModel>(
+                InputDropdownComponent(
                   label: 'Proyek',
                   controller: controller.idProyekCon,
-                  itemLabel: (e) => e?.nama ?? "",
                   required: true,
                   editable: controller.formCon.editable,
                 ),

@@ -22,21 +22,21 @@ class AkunSetupController extends GetxController {
   );
 
   // model
-  final komponenCon = InputDropdownController<String>(
+  final komponenCon = InputDropdownController(
     items: [
-      "Neraca",
-      "Laba - Rugi",
+      DropdownItem.simple("Neraca"),
+      DropdownItem.simple("Laba - Rugi"),
     ],
   );
-  final groupCon = InputDropdownController<StrukturAkunModel>();
-  final subGroupCon = InputDropdownController<StrukturAkunDetailModel>();
-  final normalPosCon = InputDropdownController<String>(
+  final groupCon = InputDropdownController();
+  final subGroupCon = InputDropdownController();
+  final normalPosCon = InputDropdownController(
     items: [
-      "Debit",
-      "Kredit",
+      DropdownItem.simple("Debit"),
+      DropdownItem.simple("Kredit"),
     ],
   );
-  final levelCon = InputDropdownController<int>();
+  final levelCon = InputDropdownController();
   final noCon = InputTextController();
   final namaCon = InputTextController();
 
@@ -78,10 +78,13 @@ class AkunSetupController extends GetxController {
       noCon.value = model.no;
       namaCon.value = model.nama;
 
-      groupCon.items =
-          masterGroup.where((e) => e.jenis == model.komponen).toList();
+      groupCon.items = masterGroup
+          .where((e) => e.jenis == model.komponen)
+          .map((e) => DropdownItem.init(e.nama ?? "", e.id))
+          .toList();
       subGroupCon.items = masterSubGroup
           .where((e) => e.idStrukturAkun == model.idStrukturAkun)
+          .map((e) => DropdownItem.init(e.nama ?? "", e.id))
           .toList();
     };
 
@@ -113,24 +116,31 @@ class AkunSetupController extends GetxController {
       }
 
       komponenCon.onChanged = (m) {
-        groupCon.setState!(() {
-          var list = masterGroup.where((e) => e.jenis == m).toList();
-          groupCon.value = list.firstWhereOrNull((e) => e == groupCon.value);
+        groupCon.setState(() {
+          var list = masterGroup
+              .where((e) => e.jenis == m?.value)
+              .map((e) => DropdownItem.init(e.nama ?? "", e.id))
+              .toList();
+          groupCon.value = m?.value;
           groupCon.items = list;
         });
       };
 
       groupCon.onChanged = (m) {
-        subGroupCon.setState!(() {
-          var list =
-              masterSubGroup.where((e) => e.idStrukturAkun == m?.id).toList();
-          subGroupCon.value =
-              list.firstWhereOrNull((e) => e == subGroupCon.value);
+        subGroupCon.setState(() {
+          var list = masterSubGroup
+              .where((e) => e.idStrukturAkun == m?.value)
+              .map((e) => DropdownItem.init(e.nama ?? "", e.id))
+              .toList();
+          subGroupCon.value = subGroupCon.value;
           subGroupCon.items = m == null ? [] : list;
         });
       };
 
-      levelCon.items = masterLevel.map((e) => e.level ?? 0).toList();
+      levelCon.items = masterLevel
+          .map((e) => e.level ?? 0)
+          .map((e) => DropdownItem.init("$e", e))
+          .toList();
 
       var akunHeaderId = Get.parameters['akunHeader'];
       if (akunHeaderId != null) {
@@ -164,10 +174,13 @@ class AkunSetupController extends GetxController {
           levelCon.value = model.level! + 1;
           namaCon.value = "";
           noCon.value = strNewNo;
-          groupCon.items =
-              masterGroup.where((e) => e.jenis == model.komponen).toList();
+          groupCon.items = masterGroup
+              .where((e) => e.jenis == model.komponen)
+              .map((e) => DropdownItem.init(e.nama, e.id))
+              .toList();
           subGroupCon.items = masterSubGroup
               .where((e) => e.idStrukturAkun == model.idStrukturAkun)
+              .map((e) => DropdownItem.init(e.nama, e.id))
               .toList();
         } else {
           Helper.dialogWarning(r.message);

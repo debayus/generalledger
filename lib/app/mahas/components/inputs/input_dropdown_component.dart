@@ -1,29 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:generalledger/app/mahas/components/inputs/input_box_component.dart';
+import 'package:generalledger/app/mahas/components/others/text_component.dart';
 import 'package:generalledger/app/mahas/my_config.dart';
 
-class InputDropdownController<T> {
+class DropdownItem {
+  String text;
+  dynamic value;
+
+  DropdownItem({
+    required this.text,
+    this.value,
+  });
+
+  DropdownItem.init(String? text, dynamic value)
+      : this(
+          text: text ?? "",
+          value: value,
+        );
+
+  DropdownItem.simple(String? value) : this.init(value, value);
+}
+
+class InputDropdownController {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  String? text;
-  T? value;
-  List<T> items = [];
-  Function(VoidCallback fn)? setState;
-  ValueChanged<T?>? onChanged;
-  bool required = false;
+  late Function(VoidCallback fn) setState;
 
-  InputDropdownController({this.required = false, this.items = const []});
+  DropdownItem? _value;
+  List<DropdownItem> items;
+  Function(DropdownItem? v)? onChanged;
 
-  void rootOnChanged(e) {
-    setState!(() {
-      value = e;
+  late bool _required = false;
+
+  dynamic get value {
+    return _value?.value;
+  }
+
+  set value(dynamic val) {
+    setState(() {
+      _value = items.firstWhere((e) => e.value == val);
+    });
+  }
+
+  InputDropdownController({
+    this.items = const [],
+  });
+
+  void _rootOnChanged(e) {
+    setState(() {
+      _value = e;
       if (onChanged != null) {
         onChanged!(e);
       }
     });
   }
 
-  String? validator(v) {
-    if (required && v == null) {
+  String? _validator(v) {
+    if (_required && v == null) {
       return 'The field is required';
     }
     return null;
@@ -37,19 +69,18 @@ class InputDropdownController<T> {
     return valid;
   }
 
-  void init(Function(VoidCallback fn)? setStateX, bool requiredX) {
+  void _init(Function(VoidCallback fn) setStateX, bool requiredX) {
     setState = setStateX;
-    required = requiredX;
+    _required = requiredX;
   }
 }
 
-class InputDropdownComponent<T> extends StatefulWidget {
+class InputDropdownComponent extends StatefulWidget {
   final String? label;
   final double? marginBottom;
   final bool required;
   final bool editable;
-  final InputDropdownController<T> controller;
-  final String Function(T?) itemLabel;
+  final InputDropdownController controller;
 
   const InputDropdownComponent({
     Key? key,
@@ -58,18 +89,16 @@ class InputDropdownComponent<T> extends StatefulWidget {
     this.editable = true,
     required this.controller,
     this.required = false,
-    required this.itemLabel,
   }) : super(key: key);
 
   @override
-  State<InputDropdownComponent<T>> createState() =>
-      _InputDropdownComponentState<T>();
+  State<InputDropdownComponent> createState() => _InputDropdownComponentState();
 }
 
-class _InputDropdownComponentState<T> extends State<InputDropdownComponent<T>> {
+class _InputDropdownComponentState extends State<InputDropdownComponent> {
   @override
   void initState() {
-    widget.controller.init(
+    widget.controller._init(
       setState,
       widget.required,
     );
@@ -81,7 +110,7 @@ class _InputDropdownComponentState<T> extends State<InputDropdownComponent<T>> {
     final decoration = InputDecoration(
       filled: true,
       contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10, right: 10),
-      fillColor: MyConfig.fontColor.withOpacity(.05),
+      fillColor: MyConfig.fontColor.withOpacity(.01),
       isDense: true,
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: MyConfig.fontColor.withOpacity(.05)),
@@ -104,23 +133,23 @@ class _InputDropdownComponentState<T> extends State<InputDropdownComponent<T>> {
       label: widget.label,
       isRequired: widget.required,
       marginBottom: widget.marginBottom,
-      childText: widget.controller.value == null
+      childText: widget.controller._value == null
           ? ""
-          : widget.itemLabel(widget.controller.value),
+          : widget.controller._value?.text ?? "",
       children: widget.editable
           ? Form(
               key: widget.controller._key,
-              child: DropdownButtonFormField<T>(
+              child: DropdownButtonFormField(
                 decoration: decoration,
                 isExpanded: true,
                 focusColor: Colors.transparent,
-                validator: widget.controller.validator,
-                value: widget.controller.value,
-                onChanged: widget.controller.rootOnChanged,
+                validator: widget.controller._validator,
+                value: widget.controller._value,
+                onChanged: widget.controller._rootOnChanged,
                 items: widget.controller.items
-                    .map((e) => DropdownMenuItem<T>(
+                    .map((e) => DropdownMenuItem(
                           value: e,
-                          child: Text(widget.itemLabel(e)),
+                          child: TextComponent(e.text),
                         ))
                     .toList(),
                 style: TextStyle(

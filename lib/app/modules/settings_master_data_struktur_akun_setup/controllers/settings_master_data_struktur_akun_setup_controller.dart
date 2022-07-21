@@ -18,10 +18,10 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
     getIdPost: (e) => e['id'],
   );
   final namaCon = InputTextController();
-  final jenisCon = InputDropdownController<String>(
+  final jenisCon = InputDropdownController(
     items: [
-      "Neraca",
-      "Laba - Rugi",
+      DropdownItem.simple("Neraca"),
+      DropdownItem.simple("Laba - Rugi"),
     ],
   );
   final keteranganCon = InputTextController();

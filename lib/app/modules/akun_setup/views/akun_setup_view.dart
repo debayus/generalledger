@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:generalledger/app/mahas/components/inputs/input_dropdown_component.dart';
 import 'package:generalledger/app/mahas/components/inputs/input_text_component.dart';
 import 'package:generalledger/app/mahas/components/pages/setup_page_component.dart';
-import 'package:generalledger/app/models/struktur_akun_model.dart';
 import 'package:get/get.dart';
 import '../controllers/akun_setup_controller.dart';
 
@@ -12,37 +11,32 @@ class AkunSetupView extends GetView<AkunSetupController> {
         controller: controller.formCon,
         title: 'Akun',
         children: () => [
-          InputDropdownComponent<String>(
+          InputDropdownComponent(
             label: 'Komponen',
             controller: controller.komponenCon,
-            itemLabel: (e) => e ?? "",
             required: true,
             editable: controller.formCon.editable,
           ),
-          InputDropdownComponent<StrukturAkunModel>(
+          InputDropdownComponent(
             label: 'Group',
             controller: controller.groupCon,
-            itemLabel: (e) => e?.nama ?? "",
             required: true,
             editable: controller.formCon.editable,
           ),
-          InputDropdownComponent<StrukturAkunDetailModel>(
+          InputDropdownComponent(
             label: 'Sub Group',
             controller: controller.subGroupCon,
-            itemLabel: (e) => e?.nama ?? "",
             editable: controller.formCon.editable,
           ),
-          InputDropdownComponent<String>(
+          InputDropdownComponent(
             label: 'Normal Pos',
             controller: controller.normalPosCon,
-            itemLabel: (e) => e ?? "",
             required: true,
             editable: controller.formCon.editable,
           ),
-          InputDropdownComponent<int>(
+          InputDropdownComponent(
             label: 'Level',
             controller: controller.levelCon,
-            itemLabel: (e) => '$e',
             required: true,
             editable: controller.formCon.editable,
           ),

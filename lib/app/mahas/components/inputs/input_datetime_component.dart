@@ -135,6 +135,7 @@ class _InputDatetimeComponentState extends State<InputDatetimeComponent> {
   Widget build(BuildContext context) {
     return InputBoxComponent(
       label: widget.label,
+      editable: widget.editable,
       isRequired: widget.required,
       icon: widget.controller._type == InputDatetimeType.date
           ? FontAwesome5.calendar

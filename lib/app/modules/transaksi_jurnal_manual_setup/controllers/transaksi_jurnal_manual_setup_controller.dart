@@ -25,7 +25,7 @@ class TransaksiJurnalManualSetupController extends GetxController {
   final noCon = InputTextController();
   final tanggalCon = InputDatetimeController();
   final catatanCon = InputTextController();
-  final idProyekCon = InputDropdownController<ProyekModel>();
+  final idProyekCon = InputDropdownController();
 
   final detailCon = InputDetailControler<JurnalDetailModel, AkunModel>(
     setKeyItem: (e) => e.idAkun,
@@ -168,7 +168,8 @@ class TransaksiJurnalManualSetupController extends GetxController {
         Helper.dialogWarning(r.message);
         return;
       }
-      idProyekCon.items = masterProyek;
+      idProyekCon.items =
+          masterProyek.map((e) => DropdownItem.init(e.nama, e.id)).toList();
       noCon.value = 'Auto';
       if (masterProyek.isNotEmpty) {
         idProyekCon.value = idProyekCon.items.first;
