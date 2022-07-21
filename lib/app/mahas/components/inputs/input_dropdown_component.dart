@@ -3,7 +3,7 @@ import 'package:generalledger/app/mahas/components/inputs/input_box_component.da
 import 'package:generalledger/app/mahas/my_config.dart';
 
 class InputDropdownController<T> {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   String? text;
   T? value;
   List<T> items = [];
@@ -30,7 +30,7 @@ class InputDropdownController<T> {
   }
 
   bool get isValid {
-    bool? valid = key.currentState?.validate();
+    bool? valid = _key.currentState?.validate();
     if (valid == null) {
       return true;
     }
@@ -109,7 +109,7 @@ class _InputDropdownComponentState<T> extends State<InputDropdownComponent<T>> {
           : widget.itemLabel(widget.controller.value),
       children: widget.editable
           ? Form(
-              key: widget.controller.key,
+              key: widget.controller._key,
               child: DropdownButtonFormField<T>(
                 decoration: decoration,
                 isExpanded: true,

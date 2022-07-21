@@ -78,7 +78,7 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
       detailBankCon.checked = e.bank ?? false;
     };
     detailCon.lookupCon.insertOnPress = () {
-      if (!detailNamaCon.key.currentState!.validate()) {
+      if (!detailNamaCon.isValid) {
         return;
       }
       detailCon.setState!(() {

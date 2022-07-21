@@ -21,7 +21,7 @@ class SettingsMasterDataProyekSetupController extends GetxController {
     super.onInit();
 
     formCon.isValid = () {
-      if (!namaCon.key.currentState!.validate()) return false;
+      if (!namaCon.isValid) return false;
       return true;
     };
     formCon.setModelApi = (id) => {

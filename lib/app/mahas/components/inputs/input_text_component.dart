@@ -7,7 +7,7 @@ import 'package:generalledger/app/mahas/services/helper.dart';
 enum InputTextType { text, email, password, number, paragraf, money }
 
 class InputTextController extends ChangeNotifier {
-  final GlobalKey<FormState> key = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final TextEditingController _con = TextEditingController();
   late Function(VoidCallback fn) setState;
 
@@ -58,7 +58,7 @@ class InputTextController extends ChangeNotifier {
   }
 
   bool get isValid {
-    bool? valid = key.currentState?.validate();
+    bool? valid = _key.currentState?.validate();
     if (valid == null) {
       return true;
     }
@@ -220,7 +220,7 @@ class _InputTextComponentState extends State<InputTextComponent> {
         childText: widget.controller._con.text,
         isRequired: widget.required,
         children: Form(
-          key: widget.controller.key,
+          key: widget.controller._key,
           child: widget.type == InputTextType.money
               ? Focus(
                   child: textFormField,

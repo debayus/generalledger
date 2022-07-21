@@ -25,7 +25,7 @@ class SettingsMasterDataKontakSetupController extends GetxController {
   @override
   void onInit() {
     formCon.isValid = () {
-      if (!namaCon.key.currentState!.validate()) return false;
+      if (!namaCon.isValid) return false;
       return true;
     };
     formCon.setModelApi = (id) => {

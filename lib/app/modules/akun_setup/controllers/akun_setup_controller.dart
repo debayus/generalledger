@@ -48,13 +48,13 @@ class AkunSetupController extends GetxController {
   @override
   void onInit() {
     formCon.isValid = () {
-      if (!komponenCon.key.currentState!.validate()) return false;
-      if (!groupCon.key.currentState!.validate()) return false;
-      if (!subGroupCon.key.currentState!.validate()) return false;
-      if (!normalPosCon.key.currentState!.validate()) return false;
-      if (!levelCon.key.currentState!.validate()) return false;
-      if (!noCon.key.currentState!.validate()) return false;
-      if (!namaCon.key.currentState!.validate()) return false;
+      if (!komponenCon.isValid) return false;
+      if (!groupCon.isValid) return false;
+      if (!subGroupCon.isValid) return false;
+      if (!normalPosCon.isValid) return false;
+      if (!levelCon.isValid) return false;
+      if (!noCon.isValid) return false;
+      if (!namaCon.isValid) return false;
       return true;
     };
     formCon.setModelApi = (id) => {
