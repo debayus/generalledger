@@ -14,7 +14,7 @@ class InputDatetimeController {
   TimeOfDay? _time;
   String? _errorMessage;
 
-  Function(bool v)? onChanged;
+  Function()? onChanged;
 
   set value(dynamic val) {
     setState(() {
@@ -74,6 +74,9 @@ class InputDatetimeController {
           _time = picked;
         });
       }
+    }
+    if (onChanged != null) {
+      onChanged!();
     }
   }
 
