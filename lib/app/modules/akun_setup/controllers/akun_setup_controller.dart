@@ -78,11 +78,11 @@ class AkunSetupController extends GetxController {
       noCon.value = model.no;
       namaCon.value = model.nama;
 
-      groupCon.items = masterGroup
+      groupCon.setItems = masterGroup
           .where((e) => e.jenis == model.komponen)
           .map((e) => DropdownItem.init(e.nama ?? "", e.id))
           .toList();
-      subGroupCon.items = masterSubGroup
+      subGroupCon.setItems = masterSubGroup
           .where((e) => e.idStrukturAkun == model.idStrukturAkun)
           .map((e) => DropdownItem.init(e.nama ?? "", e.id))
           .toList();
@@ -121,8 +121,8 @@ class AkunSetupController extends GetxController {
               .where((e) => e.jenis == m?.value)
               .map((e) => DropdownItem.init(e.nama ?? "", e.id))
               .toList();
+          groupCon.setItems = list;
           groupCon.value = m?.value;
-          groupCon.items = list;
         });
       };
 
@@ -133,11 +133,11 @@ class AkunSetupController extends GetxController {
               .map((e) => DropdownItem.init(e.nama ?? "", e.id))
               .toList();
           subGroupCon.value = subGroupCon.value;
-          subGroupCon.items = m == null ? [] : list;
+          subGroupCon.setItems = m == null ? [] : list;
         });
       };
 
-      levelCon.items = masterLevel
+      levelCon.setItems = masterLevel
           .map((e) => e.level ?? 0)
           .map((e) => DropdownItem.init("$e", e))
           .toList();
@@ -174,11 +174,11 @@ class AkunSetupController extends GetxController {
           levelCon.value = model.level! + 1;
           namaCon.value = "";
           noCon.value = strNewNo;
-          groupCon.items = masterGroup
+          groupCon.setItems = masterGroup
               .where((e) => e.jenis == model.komponen)
               .map((e) => DropdownItem.init(e.nama, e.id))
               .toList();
-          subGroupCon.items = masterSubGroup
+          subGroupCon.setItems = masterSubGroup
               .where((e) => e.idStrukturAkun == model.idStrukturAkun)
               .map((e) => DropdownItem.init(e.nama, e.id))
               .toList();

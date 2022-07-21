@@ -42,7 +42,37 @@ class XsampleView extends GetView<XsampleController> {
               ImageTextHorizontalComponent(
                 ontap: controller.dropdownOnPress,
                 iconData: FontAwesome5.rocket,
-                menuName: "Drop down",
+                menuName: "Drop down & LookUp",
+              ),
+              ImageTextHorizontalComponent(
+                ontap: () {},
+                iconData: FontAwesome5.rocket,
+                menuName: "File",
+              ),
+              ImageTextHorizontalComponent(
+                ontap: () {},
+                iconData: FontAwesome5.rocket,
+                menuName: "Detail",
+              ),
+              ImageTextHorizontalComponent(
+                ontap: () {},
+                iconData: FontAwesome5.rocket,
+                menuName: "Label",
+              ),
+              ImageTextHorizontalComponent(
+                ontap: () {},
+                iconData: FontAwesome5.rocket,
+                menuName: "Other",
+              ),
+              ImageTextHorizontalComponent(
+                ontap: () {},
+                iconData: FontAwesome5.rocket,
+                menuName: "List Page",
+              ),
+              ImageTextHorizontalComponent(
+                ontap: () {},
+                iconData: FontAwesome5.rocket,
+                menuName: "Setup Page",
               ),
             ],
           ),

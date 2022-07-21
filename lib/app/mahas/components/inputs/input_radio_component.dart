@@ -34,7 +34,7 @@ class InputRadioController {
   String? _errorMessage;
 
   InputRadioController({
-    required this.items,
+    this.items = const [],
   });
 
   void _onChanged(RadioButtonItem v, bool editable) {
@@ -45,6 +45,13 @@ class InputRadioController {
         onChanged!(v);
       }
     });
+  }
+
+  set setItems(List<RadioButtonItem> val) {
+    if (val.where((e) => e.value == _value?.value).isEmpty) {
+      _value = null;
+    }
+    items = val;
   }
 
   dynamic get value {

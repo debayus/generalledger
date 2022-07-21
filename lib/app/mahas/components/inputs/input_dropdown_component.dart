@@ -37,8 +37,19 @@ class InputDropdownController {
 
   set value(dynamic val) {
     setState(() {
-      _value = items.firstWhere((e) => e.value == val);
+      if (items.where((e) => e.value == val).isEmpty) {
+        _value = null;
+      } else {
+        _value = items.firstWhere((e) => e.value == val);
+      }
     });
+  }
+
+  set setItems(List<DropdownItem> val) {
+    if (val.where((e) => e.value == _value?.value).isEmpty) {
+      _value = null;
+    }
+    items = val;
   }
 
   InputDropdownController({
