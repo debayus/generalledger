@@ -2,31 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:generalledger/app/mahas/components/others/text_component.dart';
 
 class InputCheckboxController {
-  bool checked = false;
-  Function(VoidCallback fn)? setState;
+  bool _checked = false;
+  late Function(VoidCallback fn) setState;
   Function(bool v)? onChanged;
 
   void onTab(bool editable) {
     if (!editable) return;
-    setState!(() {
-      checked = !checked;
+    setState(() {
+      _checked = !_checked;
       if (onChanged != null) {
-        onChanged!(checked);
+        onChanged!(_checked);
       }
+    });
+  }
+
+  bool get checked {
+    return _checked;
+  }
+
+  set checked(bool val) {
+    setState(() {
+      _checked = val;
     });
   }
 
   void _onChanged(bool? v, bool editable) {
     if (!editable) return;
-    setState!(() {
-      checked = v ?? false;
+    setState(() {
+      _checked = v ?? false;
       if (onChanged != null) {
-        onChanged!(checked);
+        onChanged!(_checked);
       }
     });
   }
 
-  void init(Function(VoidCallback fn) setStateX) {
+  void _init(Function(VoidCallback fn) setStateX) {
     setState = setStateX;
   }
 }
@@ -52,7 +62,7 @@ class InputCheckboxComponent extends StatefulWidget {
 class _InputCheckboxComponentState extends State<InputCheckboxComponent> {
   @override
   void initState() {
-    widget.controller.init(setState);
+    widget.controller._init(setState);
     super.initState();
   }
 
@@ -65,12 +75,12 @@ class _InputCheckboxComponentState extends State<InputCheckboxComponent> {
         children: [
           (widget.isSwitch
               ? Switch(
-                  value: widget.controller.checked,
+                  value: widget.controller._checked,
                   onChanged: (v) =>
                       widget.controller._onChanged(v, widget.editable),
                 )
               : Checkbox(
-                  value: widget.controller.checked,
+                  value: widget.controller._checked,
                   onChanged: (v) =>
                       widget.controller._onChanged(v, widget.editable),
                 )),

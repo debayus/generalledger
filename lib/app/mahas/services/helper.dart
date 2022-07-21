@@ -245,6 +245,11 @@ class Helper {
     return r;
   }
 
+  static String idGenerator() {
+    final now = DateTime.now();
+    return now.microsecondsSinceEpoch.toString();
+  }
+
   static String currencyFormat(double? value, {bool zeroIsEmpty = true}) {
     final oCcy = NumberFormat("#,###.##########", "en_US");
     var val = oCcy.format(value ?? 0);

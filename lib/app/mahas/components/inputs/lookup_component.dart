@@ -78,9 +78,9 @@ class LookupController<T> extends ChangeNotifier {
       });
     }
     try {
-      if (filterController.con.text.isNotEmpty) {}
+      if (filterController.value.isNotEmpty) {}
       final pageIndexX = nextPage ? pageIndex + 1 : pageIndex;
-      final filterX = filterController.con.text;
+      final filterX = filterController.value as String;
       final query = urlApi!(pageIndexX, filterX);
       final apiModel = await HttpApi.apiGet(query);
       final List<T> result = [];

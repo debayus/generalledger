@@ -103,6 +103,15 @@ class LoginView extends GetView<LoginController> {
             ),
           ),
           Padding(padding: EdgeInsets.all(5)),
+          InkWell(
+            onTap: controller.sampleOnPress,
+            child: TextComponent(
+              "Sample",
+              color: MyConfig.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Padding(padding: EdgeInsets.all(5)),
         ],
       );
 }

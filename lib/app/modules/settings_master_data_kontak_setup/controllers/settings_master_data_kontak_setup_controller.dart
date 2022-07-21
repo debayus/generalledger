@@ -29,23 +29,23 @@ class SettingsMasterDataKontakSetupController extends GetxController {
       return true;
     };
     formCon.setModelApi = (id) => {
-          'nama': namaCon.con.text,
-          'telp': telpCon.con.text,
-          'whatsapp': whatsappCon.con.text,
-          'email': emailCon.con.text,
-          'perusahaan': perusahaanCon.con.text,
-          'alamat': alamatCon.con.text,
-          'catatan': catatanCon.con.text,
+          'nama': namaCon.value,
+          'telp': telpCon.value,
+          'whatsapp': whatsappCon.value,
+          'email': emailCon.value,
+          'perusahaan': perusahaanCon.value,
+          'alamat': alamatCon.value,
+          'catatan': catatanCon.value,
         };
     formCon.setModelView = (jsonString) {
       KontakModel model = KontakModel.fromDynamic(jsonString);
-      namaCon.con.text = model.nama!;
-      telpCon.con.text = model.telp ?? "";
-      whatsappCon.con.text = model.whatsapp ?? "";
-      emailCon.con.text = model.email ?? "";
-      perusahaanCon.con.text = model.perusahaan ?? "";
-      alamatCon.con.text = model.alamat ?? "";
-      catatanCon.con.text = model.catatan ?? "";
+      namaCon.value = model.nama!;
+      telpCon.value = model.telp;
+      whatsappCon.value = model.whatsapp;
+      emailCon.value = model.email;
+      perusahaanCon.value = model.perusahaan;
+      alamatCon.value = model.alamat;
+      catatanCon.value = model.catatan;
     };
 
     super.onInit();

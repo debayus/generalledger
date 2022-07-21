@@ -52,6 +52,12 @@ import '../modules/transaksi_jurnal_manual_setup/bindings/transaksi_jurnal_manua
 import '../modules/transaksi_jurnal_manual_setup/views/transaksi_jurnal_manual_setup_view.dart';
 import '../modules/transaksi_pengeluaran_tunai/bindings/transaksi_pengeluaran_tunai_binding.dart';
 import '../modules/transaksi_pengeluaran_tunai/views/transaksi_pengeluaran_tunai_view.dart';
+import '../modules/xsample/bindings/xsample_binding.dart';
+import '../modules/xsample/views/xsample_view.dart';
+import '../modules/xsample_checkbox_radio/bindings/xsample_checkbox_radio_binding.dart';
+import '../modules/xsample_checkbox_radio/views/xsample_checkbox_radio_view.dart';
+import '../modules/xsample_input/bindings/xsample_input_binding.dart';
+import '../modules/xsample_input/views/xsample_input_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -199,6 +205,21 @@ class AppPages {
       name: _Paths.TRANSAKSI_JURNAL_MANUAL_SETUP,
       page: () => TransaksiJurnalManualSetupView(),
       binding: TransaksiJurnalManualSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE,
+      page: () => const XsampleView(),
+      binding: XsampleBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_INPUT,
+      page: () => const XsampleInputView(),
+      binding: XsampleInputBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_CHECKBOX_RADIO,
+      page: () => const XsampleCheckboxRadioView(),
+      binding: XsampleCheckboxRadioBinding(),
     ),
   ];
 }

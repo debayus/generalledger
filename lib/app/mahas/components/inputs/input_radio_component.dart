@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:generalledger/app/mahas/components/inputs/input_box_component.dart';
 import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
 
 class RadioButtonItem {
   dynamic id;
@@ -12,27 +13,47 @@ class RadioButtonItem {
     required this.text,
     this.value,
   });
+
+  RadioButtonItem.autoId(String text, dynamic value)
+      : this(
+          id: Helper.idGenerator,
+          text: text,
+          value: value,
+        );
+
+  RadioButtonItem.simple(String value) : this.autoId(value, value);
 }
 
 class InputRadioController {
-  List<RadioButtonItem> items = [];
-  RadioButtonItem? value;
-  Function(VoidCallback fn)? setState;
+  late Function(VoidCallback fn) setState;
+
+  List<RadioButtonItem> items;
+  RadioButtonItem? _value;
   Function(RadioButtonItem v)? onChanged;
   bool required = false;
-  String? errorMessage;
+  String? _errorMessage;
 
   InputRadioController({
-    this.required = false,
+    required this.items,
   });
 
   void _onChanged(RadioButtonItem v, bool editable) {
     if (!editable) return;
-    setState!(() {
-      value = v;
+    setState(() {
+      _value = v;
       if (onChanged != null) {
         onChanged!(v);
       }
+    });
+  }
+
+  dynamic get value {
+    return _value?.value;
+  }
+
+  set value(dynamic val) {
+    setState(() {
+      _value = items.firstWhere((e) => e.value == val);
     });
   }
 
@@ -40,13 +61,13 @@ class InputRadioController {
     setState = setStateX;
   }
 
-  bool isValid() {
-    setState!(() {
-      errorMessage = null;
+  bool get isValid {
+    setState(() {
+      _errorMessage = null;
     });
-    if (required && value == null) {
-      setState!(() {
-        errorMessage = 'The field is required';
+    if (required && _value == null) {
+      setState(() {
+        _errorMessage = 'The field is required';
       });
       return false;
     }
@@ -57,6 +78,7 @@ class InputRadioController {
 class InputRadioComponent extends StatefulWidget {
   final InputRadioController controller;
   final bool editable;
+  final bool required;
   final String? label;
 
   const InputRadioComponent({
@@ -64,6 +86,7 @@ class InputRadioComponent extends StatefulWidget {
     required this.controller,
     this.editable = true,
     this.label,
+    this.required = false,
   }) : super(key: key);
 
   @override
@@ -74,13 +97,14 @@ class _InputRadioComponentState extends State<InputRadioComponent> {
   @override
   void initState() {
     widget.controller.init(setState);
+    widget.controller.required = widget.required;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) => InputBoxComponent(
         label: widget.label,
-        errorMessage: widget.controller.errorMessage,
+        errorMessage: widget.controller._errorMessage,
         children: Column(
           children: widget.controller.items
               .map((e) => InkWell(
@@ -92,7 +116,7 @@ class _InputRadioComponentState extends State<InputRadioComponent> {
                         children: [
                           Radio<RadioButtonItem>(
                             value: e,
-                            groupValue: widget.controller.value,
+                            groupValue: widget.controller._value,
                             onChanged: (value) => widget.controller
                                 ._onChanged(value!, widget.editable),
                           ),

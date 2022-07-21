@@ -29,7 +29,7 @@ class InputDropdownController<T> {
     return null;
   }
 
-  bool isValid() {
+  bool get isValid {
     bool? valid = key.currentState?.validate();
     if (valid == null) {
       return true;

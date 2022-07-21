@@ -25,11 +25,11 @@ class SettingsMasterDataProyekSetupController extends GetxController {
       return true;
     };
     formCon.setModelApi = (id) => {
-          'nama': namaCon.con.text,
+          'nama': namaCon.value,
         };
     formCon.setModelView = (jsonString) {
       ProyekModel model = ProyekModel.fromDynamic(jsonString);
-      namaCon.con.text = model.nama!;
+      namaCon.value = model.nama!;
     };
   }
 

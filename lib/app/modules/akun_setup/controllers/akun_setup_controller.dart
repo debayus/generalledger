@@ -63,8 +63,8 @@ class AkunSetupController extends GetxController {
           'id_struktur_akun_detail': subGroupCon.value?.id,
           'normalpos': normalPosCon.value,
           'level': levelCon.value,
-          'no': noCon.con.text,
-          'nama': namaCon.con.text,
+          'no': noCon.value,
+          'nama': namaCon.value,
         };
     formCon.setModelView = (jsonString) {
       AkunModel model = AkunModel.fromDynamic(jsonString);
@@ -75,8 +75,8 @@ class AkunSetupController extends GetxController {
           .firstWhereOrNull((e) => e.id == model.idStrukturAkunDetail);
       normalPosCon.value = model.normalpos;
       levelCon.value = model.level;
-      noCon.con.text = model.no ?? "";
-      namaCon.con.text = model.nama ?? "";
+      noCon.value = model.no;
+      namaCon.value = model.nama;
 
       groupCon.items =
           masterGroup.where((e) => e.jenis == model.komponen).toList();
@@ -162,8 +162,8 @@ class AkunSetupController extends GetxController {
               .firstWhereOrNull((e) => e.id == model.idStrukturAkunDetail);
           normalPosCon.value = model.normalpos;
           levelCon.value = model.level! + 1;
-          namaCon.con.text = "";
-          noCon.con.text = strNewNo;
+          namaCon.value = "";
+          noCon.value = strNewNo;
           groupCon.items =
               masterGroup.where((e) => e.jenis == model.komponen).toList();
           subGroupCon.items = masterSubGroup

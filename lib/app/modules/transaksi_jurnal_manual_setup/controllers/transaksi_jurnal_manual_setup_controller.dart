@@ -42,16 +42,16 @@ class TransaksiJurnalManualSetupController extends GetxController {
   @override
   void onInit() {
     formCon.isValid = () {
-      if (!noCon.isValid()) return false;
-      if (!tanggalCon.isValid()) return false;
-      if (!catatanCon.isValid()) return false;
-      if (!idProyekCon.isValid()) return false;
+      if (!noCon.isValid) return false;
+      if (!tanggalCon.isValid) return false;
+      if (!catatanCon.isValid) return false;
+      if (!idProyekCon.isValid) return false;
       return true;
     };
     formCon.setModelApi = (id) => {
-          'no': noCon.con.text,
+          'no': noCon.value,
           'tanggal': Helper.dateToString(tanggalCon.date),
-          'catatan': catatanCon.con.text,
+          'catatan': catatanCon.value,
           'idProyek': idProyekCon.value?.id,
           'debit': 0,
           'kredit': 0,
@@ -78,7 +78,7 @@ class TransaksiJurnalManualSetupController extends GetxController {
       // emailCon.con.text = model.email ?? "";
       // perusahaanCon.con.text = model.perusahaan ?? "";
       // alamatCon.con.text = model.alamat ?? "";
-      catatanCon.con.text = model.catatan ?? "";
+      catatanCon.value = model.catatan ?? "";
     };
 
     // detail lookup
@@ -93,21 +93,21 @@ class TransaksiJurnalManualSetupController extends GetxController {
     // detail form
     detailCon.lookupCon.openNew = () {
       detailCon.lookupCon.activeKey = null;
-      detailDebitCon.con.text = '';
-      detailDebitCon.moneyValue = null;
-      detailKreditCon.con.text = '';
-      detailKreditCon.moneyValue = null;
+      detailDebitCon.value = '';
+      detailDebitCon.value = null;
+      detailKreditCon.value = '';
+      detailKreditCon.value = null;
     };
     detailCon.lookupCon.openEdit = (et) {
       var e = et as JurnalDetailModel;
       detailCon.lookupCon.activeKey = e.idAkun;
-      detailDebitCon.moneyValue = e.debit;
-      detailDebitCon.con.text = Helper.currencyFormat(e.debit ?? 0);
-      detailKreditCon.moneyValue = e.kredit;
-      detailKreditCon.con.text = Helper.currencyFormat(e.kredit ?? 0);
+      detailDebitCon.value = e.debit;
+      detailDebitCon.value = Helper.currencyFormat(e.debit ?? 0);
+      detailKreditCon.value = e.kredit;
+      detailKreditCon.value = Helper.currencyFormat(e.kredit ?? 0);
     };
     detailCon.lookupCon.insertOnPress = () {
-      if (!detailDebitCon.isValid() || !detailKreditCon.isValid()) {
+      if (!detailDebitCon.isValid || !detailKreditCon.isValid) {
         return;
       }
       if (detailCon.lookupCon.itemsSelectedActive == null) {
@@ -115,17 +115,16 @@ class TransaksiJurnalManualSetupController extends GetxController {
             .indexWhere((e) => e.idAkun == detailCon.lookupCon.activeKey);
         if (index >= 0) {
           detailCon.setState!(() {
-            detailCon.values[index].debit = detailDebitCon.moneyValue;
-            detailCon.values[index].kredit = detailKreditCon.moneyValue;
+            detailCon.values[index].debit = detailDebitCon.value;
+            detailCon.values[index].kredit = detailKreditCon.value;
           });
         }
         detailCon.lookupCon.close();
       } else {
         if (detailCon.lookupCon.itemsSelectedActive != null) {
-          detailCon.lookupCon.itemsSelectedActive!.debit =
-              detailDebitCon.moneyValue;
+          detailCon.lookupCon.itemsSelectedActive!.debit = detailDebitCon.value;
           detailCon.lookupCon.itemsSelectedActive!.kredit =
-              detailKreditCon.moneyValue;
+              detailKreditCon.value;
           detailCon.lookupCon.itemsSelected
               .add(detailCon.lookupCon.itemsSelectedActive!);
         }
@@ -170,7 +169,7 @@ class TransaksiJurnalManualSetupController extends GetxController {
         return;
       }
       idProyekCon.items = masterProyek;
-      noCon.con.text = 'Auto';
+      noCon.value = 'Auto';
       if (masterProyek.isNotEmpty) {
         idProyekCon.value = idProyekCon.items.first;
       }

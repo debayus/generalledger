@@ -7,30 +7,26 @@ import 'package:generalledger/app/mahas/services/helper.dart';
 enum InputTextType { text, email, password, number, paragraf, money }
 
 class InputTextController extends ChangeNotifier {
-  bool required = false;
-  InputTextType type = InputTextType.text;
-  bool showPassword = false;
-  GlobalKey<FormState> key = GlobalKey<FormState>();
-  TextEditingController con = TextEditingController();
-  String? value;
-  Function(VoidCallback fn)? setState;
+  final GlobalKey<FormState> key = GlobalKey<FormState>();
+  final TextEditingController _con = TextEditingController();
+  late Function(VoidCallback fn) setState;
+
+  bool _required = false;
+  InputTextType _type = InputTextType.text;
+  double? _moneyValue;
+  bool _showPassword = false;
+
   VoidCallback? onEditingComplete;
   ValueChanged<String>? onChanged;
   GestureTapCallback? onTap;
   ValueChanged<String>? onFieldSubmitted;
   FormFieldSetter<String>? onSaved;
-  bool? visibility;
-  double? moneyValue;
 
-  InputTextController({
-    this.required = false,
-  });
-
-  String? validator(String? v, {FormFieldValidator<String>? otherValidator}) {
-    if (required && (v?.isEmpty ?? false)) {
+  String? _validator(String? v, {FormFieldValidator<String>? otherValidator}) {
+    if (_required && (v?.isEmpty ?? false)) {
       return 'The field is required';
     }
-    if (type == InputTextType.email) {
+    if (_type == InputTextType.email) {
       final pattern =
           r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
           r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
@@ -48,7 +44,20 @@ class InputTextController extends ChangeNotifier {
     return null;
   }
 
-  bool isValid() {
+  void _onFocusChange(bool? stateFocus) {
+    if (stateFocus ?? false) {
+      _con.text = _moneyValue == 0 ? "" : "${_moneyValue ?? ""}";
+    } else {
+      _moneyValue = double.tryParse(_con.text);
+      _con.text = Helper.currencyFormat(_moneyValue ?? 0);
+    }
+  }
+
+  void _init(Function(VoidCallback fn) setStateX) {
+    setState = setStateX;
+  }
+
+  bool get isValid {
     bool? valid = key.currentState?.validate();
     if (valid == null) {
       return true;
@@ -56,42 +65,29 @@ class InputTextController extends ChangeNotifier {
     return valid;
   }
 
-  void onFocusChange(bool? stateFocus) {
-    if (stateFocus ?? false) {
-      con.text = moneyValue == 0 ? "" : "${moneyValue ?? ""}";
+  dynamic get value {
+    if (_type == InputTextType.number) {
+      return num.tryParse(_con.text);
+    } else if (_type == InputTextType.money) {
+      return _moneyValue;
     } else {
-      moneyValue = double.tryParse(con.text);
-      con.text = Helper.currencyFormat(moneyValue ?? 0);
+      return _con.text;
     }
   }
 
-  void setVisible(bool value) {
-    setState!(() {
-      visibility = value;
-    });
-  }
-
-  bool getVisible() {
-    return visibility == null ? false : visibility!;
-  }
-
-  void init(Function(VoidCallback fn)? setStateX) {
-    setState = setStateX;
+  set value(dynamic value) {
+    if (_type == InputTextType.money) {
+      _con.text = value == null ? "" : Helper.currencyFormat(value ?? 0);
+      _moneyValue = value;
+    } else {
+      _con.text = value == null ? "" : "$value";
+    }
   }
 
   @override
   void dispose() {
-    con.dispose();
+    _con.dispose();
     super.dispose();
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
 
@@ -132,28 +128,27 @@ class InputTextComponent extends StatefulWidget {
 class _InputTextComponentState extends State<InputTextComponent> {
   @override
   void initState() {
-    widget.controller.init(setState);
+    widget.controller._init(setState);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    widget.controller.required = widget.required;
-    widget.controller.type = widget.type;
-    widget.controller.visibility = widget.visibility;
+    widget.controller._required = widget.required;
+    widget.controller._type = widget.type;
 
     final decoration = InputDecoration(
       filled: true,
-      fillColor: MyConfig.fontColor.withOpacity(.05),
+      fillColor: MyConfig.fontColor.withOpacity(widget.editable ? .01 : .05),
       hintText: widget.placeHolder,
       isDense: true,
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: MyConfig.fontColor.withOpacity(.05)),
+        borderSide: BorderSide(color: MyConfig.fontColor.withOpacity(.1)),
         borderRadius:
             BorderRadius.all(widget.borderRadius ?? Radius.circular(4.0)),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: MyConfig.fontColor.withOpacity(.05)),
+        borderSide: BorderSide(color: MyConfig.fontColor.withOpacity(.1)),
         borderRadius:
             BorderRadius.all(widget.borderRadius ?? Radius.circular(4.0)),
       ),
@@ -169,11 +164,11 @@ class _InputTextComponentState extends State<InputTextComponent> {
           ? InkWell(
               splashColor: Colors.transparent,
               onTap: () => setState(() {
-                widget.controller.showPassword =
-                    !widget.controller.showPassword;
+                widget.controller._showPassword =
+                    !widget.controller._showPassword;
               }),
               child: Icon(
-                widget.controller.showPassword
+                widget.controller._showPassword
                     ? Icons.visibility_off
                     : Icons.visibility,
                 color: MyConfig.fontColor.withOpacity(0.6),
@@ -200,14 +195,14 @@ class _InputTextComponentState extends State<InputTextComponent> {
               ...(widget.inputFormatters ?? []),
             ]
           : null,
-      controller: widget.controller.con,
+      controller: widget.controller._con,
       validator: (v) =>
-          widget.controller.validator(v, otherValidator: widget.validator),
+          widget.controller._validator(v, otherValidator: widget.validator),
       autocorrect: false,
       enableSuggestions: false,
       readOnly: !widget.editable,
       obscureText: widget.type == InputTextType.password
-          ? !widget.controller.showPassword
+          ? !widget.controller._showPassword
           : false,
       onEditingComplete: widget.controller.onEditingComplete,
       keyboardType: (widget.type == InputTextType.number ||
@@ -222,14 +217,14 @@ class _InputTextComponentState extends State<InputTextComponent> {
       child: InputBoxComponent(
         label: widget.label,
         marginBottom: widget.marginBottom,
-        childText: widget.controller.con.text,
+        childText: widget.controller._con.text,
         isRequired: widget.required,
         children: Form(
           key: widget.controller.key,
           child: widget.type == InputTextType.money
               ? Focus(
                   child: textFormField,
-                  onFocusChange: widget.controller.onFocusChange,
+                  onFocusChange: widget.controller._onFocusChange,
                 )
               : textFormField,
         ),

@@ -76,9 +76,9 @@ class ListPageController<T> {
       });
     }
     try {
-      if (filterController.con.text.isNotEmpty) {}
+      if (filterController.value.isNotEmpty) {}
       var pageIndexX = nextPage ? pageIndex + 1 : pageIndex;
-      final filterX = filterController.con.text;
+      final filterX = filterController.value;
       final query = urlApi!(pageIndexX + 1, filterX);
       final apiModel = await HttpApi.apiGet(query);
       final List<T> result = [];

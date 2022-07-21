@@ -30,13 +30,13 @@ class SettingsMasterDataKonsepAkunSetupController extends GetxController {
   @override
   void onInit() {
     formCon.isValid = () {
-      if (!levelmaxCon.isValid()) return false;
-      if (!digitmaxCon.isValid()) return false;
+      if (!levelmaxCon.isValid) return false;
+      if (!digitmaxCon.isValid) return false;
       return true;
     };
     formCon.setModelApi = (id) => {
-          'levelmax': int.parse(levelmaxCon.con.text),
-          'digitmax': int.parse(digitmaxCon.con.text),
+          'levelmax': int.parse(levelmaxCon.value),
+          'digitmax': int.parse(digitmaxCon.value),
           'detail': detailCon.values
               .map((e) => ({
                     'level': e.level,
@@ -46,41 +46,41 @@ class SettingsMasterDataKonsepAkunSetupController extends GetxController {
         };
     formCon.setModelView = (jsonString) {
       KonsepAkunModel model = KonsepAkunModel.fromDynamic(jsonString);
-      levelmaxCon.con.text = "${model.levelmax}";
-      digitmaxCon.con.text = "${model.digitmax}";
+      levelmaxCon.value = "${model.levelmax}";
+      digitmaxCon.value = "${model.digitmax}";
       detailCon.values = model.detail ?? [];
     };
 
     // detail form
     detailCon.lookupCon.openNew = () {
       detailCon.lookupCon.activeKey = null;
-      detailLevelCon.con.text =
+      detailLevelCon.value =
           "${detailCon.values.isEmpty ? 1 : (detailCon.values.last.level! + 1)}";
-      detailJumlahDigitCon.con.text = '';
+      detailJumlahDigitCon.value = '';
     };
     detailCon.lookupCon.openEdit = (et) {
       var e = et as KonsepAkunDetailModel;
       detailCon.lookupCon.activeKey = e.level;
-      detailLevelCon.con.text = "${e.level}";
-      detailJumlahDigitCon.con.text = "${e.jumlahdigit}";
+      detailLevelCon.value = "${e.level}";
+      detailJumlahDigitCon.value = "${e.jumlahdigit}";
     };
     detailCon.lookupCon.insertOnPress = () {
-      if (!detailLevelCon.isValid() || !detailJumlahDigitCon.isValid()) {
+      if (!detailLevelCon.isValid || !detailJumlahDigitCon.isValid) {
         return;
       }
       detailCon.setState!(() {
         if (detailCon.lookupCon.activeKey == null) {
           detailCon.values.add(KonsepAkunDetailModel(
-            level: int.parse(detailLevelCon.con.text),
-            jumlahdigit: int.parse(detailJumlahDigitCon.con.text),
+            level: int.parse(detailLevelCon.value),
+            jumlahdigit: int.parse(detailJumlahDigitCon.value),
             isNew: true,
           ));
         } else {
           int index = detailCon.values
               .indexWhere((e) => e.level == detailCon.lookupCon.activeKey);
-          detailCon.values[index].level = int.parse(detailLevelCon.con.text);
+          detailCon.values[index].level = int.parse(detailLevelCon.value);
           detailCon.values[index].jumlahdigit =
-              int.parse(detailJumlahDigitCon.con.text);
+              int.parse(detailJumlahDigitCon.value);
         }
       });
       detailCon.lookupCon.close();

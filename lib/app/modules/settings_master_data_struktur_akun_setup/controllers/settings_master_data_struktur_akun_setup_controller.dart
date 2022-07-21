@@ -38,14 +38,14 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
   @override
   void onInit() {
     formCon.isValid = () {
-      if (!jenisCon.isValid()) return false;
-      if (!namaCon.isValid()) return false;
+      if (!jenisCon.isValid) return false;
+      if (!namaCon.isValid) return false;
       return true;
     };
     formCon.setModelApi = (id) => {
-          'nama': namaCon.con.text,
+          'nama': namaCon.value,
           'jenis': jenisCon.value,
-          'keterangan': keteranganCon.con.text,
+          'keterangan': keteranganCon.value,
           'detail': detailCon.values
               .map((e) => ({
                     'nama': e.nama,
@@ -57,8 +57,8 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
         };
     formCon.setModelView = (jsonString) {
       StrukturAkunModel model = StrukturAkunModel.fromDynamic(jsonString);
-      namaCon.con.text = model.nama!;
-      keteranganCon.con.text = model.keterangan ?? "";
+      namaCon.value = model.nama!;
+      keteranganCon.value = model.keterangan ?? "";
       jenisCon.value = model.jenis!;
       detailCon.values = model.detail ?? [];
     };
@@ -66,14 +66,14 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
     // detail form
     detailCon.lookupCon.openNew = () {
       detailCon.lookupCon.activeKey = null;
-      detailNamaCon.con.text = '';
+      detailNamaCon.value = '';
       detailCashCon.checked = false;
       detailBankCon.checked = false;
     };
     detailCon.lookupCon.openEdit = (et) {
       var e = et as StrukturAkunDetailModel;
       detailCon.lookupCon.activeKey = e.id;
-      detailNamaCon.con.text = e.nama!;
+      detailNamaCon.value = e.nama!;
       detailCashCon.checked = e.cash ?? false;
       detailBankCon.checked = e.bank ?? false;
     };
@@ -88,7 +88,7 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
               : 0;
           detailCon.values.add(StrukturAkunDetailModel(
             id: id + 100,
-            nama: detailNamaCon.con.text,
+            nama: detailNamaCon.value,
             cash: detailCashCon.checked,
             bank: detailBankCon.checked,
             isNew: true,
@@ -96,7 +96,7 @@ class SettingsMasterDataStrukturAkunSetupController extends GetxController {
         } else {
           int index = detailCon.values
               .indexWhere((e) => e.id == detailCon.lookupCon.activeKey);
-          detailCon.values[index].nama = detailNamaCon.con.text;
+          detailCon.values[index].nama = detailNamaCon.value;
           detailCon.values[index].cash = detailCashCon.checked;
           detailCon.values[index].bank = detailBankCon.checked;
         }

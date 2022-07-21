@@ -19,7 +19,7 @@ class InputDatetimeController {
   BuildContext? context;
   Function(bool v)? onChanged;
 
-  bool isValid() {
+  bool get isValid {
     setState!(() {
       errorMessage = null;
     });

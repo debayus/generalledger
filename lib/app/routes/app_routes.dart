@@ -39,6 +39,9 @@ abstract class Routes {
   static const TRANSAKSI_JURNAL_MANUAL = _Paths.TRANSAKSI_JURNAL_MANUAL;
   static const TRANSAKSI_JURNAL_MANUAL_SETUP =
       _Paths.TRANSAKSI_JURNAL_MANUAL_SETUP;
+  static const XSAMPLE = _Paths.XSAMPLE;
+  static const XSAMPLE_INPUT = _Paths.XSAMPLE_INPUT;
+  static const XSAMPLE_CHECKBOX_RADIO = _Paths.XSAMPLE_CHECKBOX_RADIO;
 }
 
 abstract class _Paths {
@@ -76,4 +79,7 @@ abstract class _Paths {
   static const AKUN_SETUP = '/akun-setup';
   static const TRANSAKSI_JURNAL_MANUAL = '/transaksi-jurnal-manual';
   static const TRANSAKSI_JURNAL_MANUAL_SETUP = '/transaksi-jurnal-manual-setup';
+  static const XSAMPLE = '/xsample';
+  static const XSAMPLE_INPUT = '/xsample-input';
+  static const XSAMPLE_CHECKBOX_RADIO = '/xsample-checkbox-radio';
 }

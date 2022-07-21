@@ -18,20 +18,20 @@ class LoginRegisterController extends GetxController {
 
   void onSubmit() async {
     if (EasyLoading.isShow) return;
-    if (!namaCon.isValid()) return;
-    if (!emailCon.isValid()) return;
-    if (!telplCon.isValid()) return;
-    if (!whatsapplCon.isValid()) return;
-    if (!alamatlCon.isValid()) return;
+    if (!namaCon.isValid) return;
+    if (!emailCon.isValid) return;
+    if (!telplCon.isValid) return;
+    if (!whatsapplCon.isValid) return;
+    if (!alamatlCon.isValid) return;
 
     try {
       await EasyLoading.show();
       var r = await HttpApi.apiPost('/api/perusahaan', body: {
-        "nama": namaCon.con.text,
-        "email": emailCon.con.text,
-        "telp": telplCon.con.text,
-        "whatsapp": whatsapplCon.con.text,
-        "alamat": alamatlCon.con.text,
+        "nama": namaCon.value,
+        "email": emailCon.value,
+        "telp": telplCon.value,
+        "whatsapp": whatsapplCon.value,
+        "alamat": alamatlCon.value,
       });
       await EasyLoading.dismiss();
       if (r.success) {
