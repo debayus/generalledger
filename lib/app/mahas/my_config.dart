@@ -4,6 +4,7 @@ import 'package:generalledger/app/mahas/services/http_api.dart';
 class MyConfig {
   static String server = 'Laravel';
   static String urlApi = 'http://127.0.0.1:8000';
+  static String dateFormat = 'dd/MM/yyyy';
 
   static const Color fontColor = Colors.black;
   static const Color backgroundColor = Colors.white;

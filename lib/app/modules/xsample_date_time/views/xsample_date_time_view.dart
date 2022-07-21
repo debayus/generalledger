@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:generalledger/app/mahas/components/inputs/input_checkbox_component.dart';
-import 'package:generalledger/app/mahas/components/inputs/input_checkbox_multiple_component.dart';
-import 'package:generalledger/app/mahas/components/inputs/input_radio_component.dart';
+import 'package:generalledger/app/mahas/components/inputs/input_datetime_component.dart';
 import 'package:generalledger/app/mahas/components/others/button_component.dart';
 import 'package:generalledger/app/mahas/components/others/container_component.dart';
 import 'package:generalledger/app/mahas/components/others/text_component.dart';
@@ -9,16 +7,16 @@ import 'package:generalledger/app/mahas/my_config.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/xsample_checkbox_radio_controller.dart';
+import '../controllers/xsample_date_time_controller.dart';
 
-class XsampleCheckboxRadioView extends GetView<XsampleCheckboxRadioController> {
-  const XsampleCheckboxRadioView({Key? key}) : super(key: key);
+class XsampleDateTimeView extends GetView<XsampleDateTimeController> {
+  const XsampleDateTimeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: TextComponent(
-          'Checkbox & Radio',
+          'Date & Time',
           color: MyConfig.primaryColorRevenge,
           size: TextSize.h6,
         ),
@@ -28,27 +26,18 @@ class XsampleCheckboxRadioView extends GetView<XsampleCheckboxRadioController> {
         child: Obx(
           () => Column(
             children: [
-              InputCheckboxComponent(
-                controller: controller.checkboxCon,
-                editable: controller.editable.value,
-                label: 'Checkbox',
-              ),
-              InputCheckboxComponent(
-                controller: controller.switchCon,
-                editable: controller.editable.value,
-                isSwitch: true,
-                label: 'Switch',
-              ),
-              InputRadioComponent(
-                controller: controller.radioCon,
+              InputDatetimeComponent(
+                controller: controller.dateCon,
                 editable: controller.editable.value,
                 required: true,
-                label: 'Radio',
+                label: 'Date',
               ),
-              InputCheckboxMultipleComponent(
-                controller: controller.checkboxMultipleCon,
+              InputDatetimeComponent(
+                controller: controller.timeCon,
                 editable: controller.editable.value,
-                label: 'Checkbox Multiple',
+                required: true,
+                label: 'Time',
+                type: InputDatetimeType.time,
               ),
               ButtonComponent(
                 label: "Validate",

@@ -74,10 +74,10 @@ class InputBoxComponent extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: MyConfig.fontColor.withOpacity(.05),
+                    color: MyConfig.fontColor.withOpacity(.01),
                     border: errorMessage != null
                         ? Border.all(color: Colors.red.shade700, width: .8)
-                        : null,
+                        : Border.all(color: MyConfig.fontColor, width: .1),
                   ),
                   padding: childrenSizeBox != null
                       ? null

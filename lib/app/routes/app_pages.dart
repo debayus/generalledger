@@ -56,6 +56,8 @@ import '../modules/xsample/bindings/xsample_binding.dart';
 import '../modules/xsample/views/xsample_view.dart';
 import '../modules/xsample_checkbox_radio/bindings/xsample_checkbox_radio_binding.dart';
 import '../modules/xsample_checkbox_radio/views/xsample_checkbox_radio_view.dart';
+import '../modules/xsample_date_time/bindings/xsample_date_time_binding.dart';
+import '../modules/xsample_date_time/views/xsample_date_time_view.dart';
 import '../modules/xsample_input/bindings/xsample_input_binding.dart';
 import '../modules/xsample_input/views/xsample_input_view.dart';
 
@@ -220,6 +222,11 @@ class AppPages {
       name: _Paths.XSAMPLE_CHECKBOX_RADIO,
       page: () => const XsampleCheckboxRadioView(),
       binding: XsampleCheckboxRadioBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_DATE_TIME,
+      page: () => const XsampleDateTimeView(),
+      binding: XsampleDateTimeBinding(),
     ),
   ];
 }

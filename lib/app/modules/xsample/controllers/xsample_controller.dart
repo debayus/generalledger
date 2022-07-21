@@ -10,4 +10,8 @@ class XsampleController extends GetxController {
   void checkboxRadioOnPress() {
     Helper.toNamed(Routes.XSAMPLE_CHECKBOX_RADIO);
   }
+
+  void dateTimeOnPress() {
+    Helper.toNamed(Routes.XSAMPLE_DATE_TIME);
+  }
 }

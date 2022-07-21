@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:generalledger/app/mahas/components/inputs/input_box_component.dart';
 import 'package:generalledger/app/mahas/components/others/text_component.dart';
+import 'package:generalledger/app/mahas/services/helper.dart';
 
 class CheckboxMultipleItem {
   dynamic id;
@@ -12,16 +13,34 @@ class CheckboxMultipleItem {
     required this.text,
     this.checked = false,
   });
+
+  CheckboxMultipleItem.autoId(String text, bool checked)
+      : this(
+          id: Helper.idGenerator,
+          text: text,
+          checked: checked,
+        );
+
+  CheckboxMultipleItem.simple(String text)
+      : this(
+          id: Helper.idGenerator,
+          text: text,
+          checked: false,
+        );
 }
 
 class InputCheckboxMultipleController {
-  List<CheckboxMultipleItem> items = [];
-  Function(VoidCallback fn)? setState;
+  List<CheckboxMultipleItem> items;
+  late Function(VoidCallback fn) setState;
   Function(CheckboxMultipleItem v)? onChanged;
+
+  InputCheckboxMultipleController({
+    required this.items,
+  });
 
   void _onChanged(CheckboxMultipleItem v, bool editable) {
     if (!editable) return;
-    setState!(() {
+    setState(() {
       v.checked = !v.checked;
       if (onChanged != null) {
         onChanged!(v);
@@ -29,12 +48,12 @@ class InputCheckboxMultipleController {
     });
   }
 
-  void init(Function(VoidCallback fn) setStateX) {
-    setState = setStateX;
+  void refresh() {
+    setState(() {});
   }
 
-  bool isValid() {
-    return true;
+  void _init(Function(VoidCallback fn) setStateX) {
+    setState = setStateX;
   }
 }
 
@@ -59,7 +78,7 @@ class _InputCheckboxMultipleComponentState
     extends State<InputCheckboxMultipleComponent> {
   @override
   void initState() {
-    widget.controller.init(setState);
+    widget.controller._init(setState);
     super.initState();
   }
 

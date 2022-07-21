@@ -26,17 +26,18 @@ class XsampleView extends GetView<XsampleController> {
             children: [
               ImageTextHorizontalComponent(
                 ontap: controller.inputOnPress,
-                imageMenu: false,
                 iconData: FontAwesome5.rocket,
-                showUnderline: true,
                 menuName: "Input",
               ),
               ImageTextHorizontalComponent(
                 ontap: controller.checkboxRadioOnPress,
-                imageMenu: false,
                 iconData: FontAwesome5.rocket,
-                showUnderline: true,
                 menuName: "Checkbox & Radio",
+              ),
+              ImageTextHorizontalComponent(
+                ontap: controller.dateTimeOnPress,
+                iconData: FontAwesome5.rocket,
+                menuName: "Date & Time",
               ),
             ],
           ),

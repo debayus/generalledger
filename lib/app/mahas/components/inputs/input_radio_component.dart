@@ -57,7 +57,7 @@ class InputRadioController {
     });
   }
 
-  void init(Function(VoidCallback fn) setStateX) {
+  void _init(Function(VoidCallback fn) setStateX) {
     setState = setStateX;
   }
 
@@ -96,7 +96,7 @@ class InputRadioComponent extends StatefulWidget {
 class _InputRadioComponentState extends State<InputRadioComponent> {
   @override
   void initState() {
-    widget.controller.init(setState);
+    widget.controller._init(setState);
     widget.controller.required = widget.required;
     super.initState();
   }

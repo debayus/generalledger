@@ -9,8 +9,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Helper {
-  static String? dateToString(DateTime? date,
-      {String format = 'yyyy-MM-dd HH:mm', bool returnNull = false}) {
+  static String? dateToString(
+    DateTime? date, {
+    String format = 'yyyy-MM-dd',
+    bool returnNull = false,
+  }) {
     if (date == null) return returnNull ? null : "";
     final DateFormat formatter = DateFormat(format);
     final String formatted = formatter.format(date);
@@ -33,6 +36,24 @@ class Helper {
         hour: int.parse(time.split(":")[0]) + add,
         minute: int.parse(time.split(":")[1].split(' ')[0]));
     return r;
+  }
+
+  static String? timeToString(
+    TimeOfDay? time, {
+    bool twentyFour = true,
+    bool returnNull = false,
+  }) {
+    if (time == null) return returnNull ? null : "";
+    var hour =
+        twentyFour ? time.hour : (time.hour > 12 ? time.hour - 12 : time.hour);
+    if (hour == 0) {
+      hour = 12;
+    }
+    var minute = time.minute;
+    var strHour = hour > 9 ? '$hour' : '0$hour';
+    var strMinute = minute > 9 ? '$minute' : '0$minute';
+    var r = "$strHour:$strMinute";
+    return twentyFour ? r : '$r ${time.hour > 12 ? 'PM' : 'AM'}';
   }
 
   static Future dialogShow(String message) async {

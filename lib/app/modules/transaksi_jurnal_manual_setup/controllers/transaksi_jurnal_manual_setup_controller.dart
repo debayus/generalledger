@@ -50,7 +50,7 @@ class TransaksiJurnalManualSetupController extends GetxController {
     };
     formCon.setModelApi = (id) => {
           'no': noCon.value,
-          'tanggal': Helper.dateToString(tanggalCon.date),
+          'tanggal': Helper.dateToString(tanggalCon.value),
           'catatan': catatanCon.value,
           'idProyek': idProyekCon.value?.id,
           'debit': 0,
@@ -173,7 +173,7 @@ class TransaksiJurnalManualSetupController extends GetxController {
       if (masterProyek.isNotEmpty) {
         idProyekCon.value = idProyekCon.items.first;
       }
-      tanggalCon.date = DateTime.now();
+      tanggalCon.value = DateTime.now();
     };
 
     super.onInit();
